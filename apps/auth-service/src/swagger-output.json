@@ -7,11 +7,9 @@
   },
   "host": "localhost:6001",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
-    "/user-registaration": {
+    "/api/user-registaration": {
       "post": {
         "description": "",
         "parameters": [

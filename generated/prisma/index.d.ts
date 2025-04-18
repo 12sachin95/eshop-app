@@ -3101,18 +3101,18 @@ export namespace Prisma {
 
   export type usersWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    email?: string
     AND?: usersWhereInput | usersWhereInput[]
     OR?: usersWhereInput[]
     NOT?: usersWhereInput | usersWhereInput[]
     name?: StringFilter<"users"> | string
-    email?: StringFilter<"users"> | string
     password?: StringNullableFilter<"users"> | string | null
     following?: StringNullableListFilter<"users">
     createdAt?: DateTimeFilter<"users"> | Date | string
     updatedAt?: DateTimeFilter<"users"> | Date | string
     imagesId?: StringFilter<"users"> | string
     avatar?: XOR<ImagesNullableScalarRelationFilter, imagesWhereInput> | null
-  }, "id">
+  }, "id" | "email">
 
   export type usersOrderByWithAggregationInput = {
     id?: SortOrder
