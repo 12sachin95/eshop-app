@@ -1918,7 +1918,6 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    imagesId: string | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -1928,7 +1927,6 @@ export namespace Prisma {
     password: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    imagesId: string | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -1939,7 +1937,6 @@ export namespace Prisma {
     following: number
     createdAt: number
     updatedAt: number
-    imagesId: number
     _all: number
   }
 
@@ -1951,7 +1948,6 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     updatedAt?: true
-    imagesId?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -1961,7 +1957,6 @@ export namespace Prisma {
     password?: true
     createdAt?: true
     updatedAt?: true
-    imagesId?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -1972,7 +1967,6 @@ export namespace Prisma {
     following?: true
     createdAt?: true
     updatedAt?: true
-    imagesId?: true
     _all?: true
   }
 
@@ -2056,7 +2050,6 @@ export namespace Prisma {
     following: string[]
     createdAt: Date
     updatedAt: Date
-    imagesId: string
     _count: UsersCountAggregateOutputType | null
     _min: UsersMinAggregateOutputType | null
     _max: UsersMaxAggregateOutputType | null
@@ -2084,7 +2077,6 @@ export namespace Prisma {
     following?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    imagesId?: boolean
     avatar?: boolean | users$avatarArgs<ExtArgs>
   }, ExtArgs["result"]["users"]>
 
@@ -2098,10 +2090,9 @@ export namespace Prisma {
     following?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    imagesId?: boolean
   }
 
-  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "following" | "createdAt" | "updatedAt" | "imagesId", ExtArgs["result"]["users"]>
+  export type usersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "following" | "createdAt" | "updatedAt", ExtArgs["result"]["users"]>
   export type usersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     avatar?: boolean | users$avatarArgs<ExtArgs>
   }
@@ -2119,7 +2110,6 @@ export namespace Prisma {
       following: string[]
       createdAt: Date
       updatedAt: Date
-      imagesId: string
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -2520,7 +2510,6 @@ export namespace Prisma {
     readonly following: FieldRef<"users", 'String[]'>
     readonly createdAt: FieldRef<"users", 'DateTime'>
     readonly updatedAt: FieldRef<"users", 'DateTime'>
-    readonly imagesId: FieldRef<"users", 'String'>
   }
     
 
@@ -2949,8 +2938,7 @@ export namespace Prisma {
     password: 'password',
     following: 'following',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    imagesId: 'imagesId'
+    updatedAt: 'updatedAt'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -3083,7 +3071,6 @@ export namespace Prisma {
     following?: StringNullableListFilter<"users">
     createdAt?: DateTimeFilter<"users"> | Date | string
     updatedAt?: DateTimeFilter<"users"> | Date | string
-    imagesId?: StringFilter<"users"> | string
     avatar?: XOR<ImagesNullableScalarRelationFilter, imagesWhereInput> | null
   }
 
@@ -3095,7 +3082,6 @@ export namespace Prisma {
     following?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    imagesId?: SortOrder
     avatar?: imagesOrderByWithRelationInput
   }
 
@@ -3110,7 +3096,6 @@ export namespace Prisma {
     following?: StringNullableListFilter<"users">
     createdAt?: DateTimeFilter<"users"> | Date | string
     updatedAt?: DateTimeFilter<"users"> | Date | string
-    imagesId?: StringFilter<"users"> | string
     avatar?: XOR<ImagesNullableScalarRelationFilter, imagesWhereInput> | null
   }, "id" | "email">
 
@@ -3122,7 +3107,6 @@ export namespace Prisma {
     following?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    imagesId?: SortOrder
     _count?: usersCountOrderByAggregateInput
     _max?: usersMaxOrderByAggregateInput
     _min?: usersMinOrderByAggregateInput
@@ -3139,7 +3123,6 @@ export namespace Prisma {
     following?: StringNullableListFilter<"users">
     createdAt?: DateTimeWithAggregatesFilter<"users"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"users"> | Date | string
-    imagesId?: StringWithAggregatesFilter<"users"> | string
   }
 
   export type imagesCreateInput = {
@@ -3194,7 +3177,6 @@ export namespace Prisma {
     following?: usersCreatefollowingInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    imagesId: string
     avatar?: imagesCreateNestedOneWithoutUsersInput
   }
 
@@ -3206,7 +3188,6 @@ export namespace Prisma {
     following?: usersCreatefollowingInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    imagesId: string
     avatar?: imagesUncheckedCreateNestedOneWithoutUsersInput
   }
 
@@ -3217,7 +3198,6 @@ export namespace Prisma {
     following?: usersUpdatefollowingInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imagesId?: StringFieldUpdateOperationsInput | string
     avatar?: imagesUpdateOneWithoutUsersNestedInput
   }
 
@@ -3228,7 +3208,6 @@ export namespace Prisma {
     following?: usersUpdatefollowingInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imagesId?: StringFieldUpdateOperationsInput | string
     avatar?: imagesUncheckedUpdateOneWithoutUsersNestedInput
   }
 
@@ -3240,7 +3219,6 @@ export namespace Prisma {
     following?: usersCreatefollowingInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    imagesId: string
   }
 
   export type usersUpdateManyMutationInput = {
@@ -3250,7 +3228,6 @@ export namespace Prisma {
     following?: usersUpdatefollowingInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imagesId?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersUncheckedUpdateManyInput = {
@@ -3260,7 +3237,6 @@ export namespace Prisma {
     following?: usersUpdatefollowingInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imagesId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3370,7 +3346,6 @@ export namespace Prisma {
     following?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    imagesId?: SortOrder
   }
 
   export type usersMaxOrderByAggregateInput = {
@@ -3380,7 +3355,6 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    imagesId?: SortOrder
   }
 
   export type usersMinOrderByAggregateInput = {
@@ -3390,7 +3364,6 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    imagesId?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -3616,7 +3589,6 @@ export namespace Prisma {
     following?: usersCreatefollowingInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    imagesId: string
   }
 
   export type usersUncheckedCreateWithoutAvatarInput = {
@@ -3627,7 +3599,6 @@ export namespace Prisma {
     following?: usersCreatefollowingInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    imagesId: string
   }
 
   export type usersCreateOrConnectWithoutAvatarInput = {
@@ -3653,7 +3624,6 @@ export namespace Prisma {
     following?: usersUpdatefollowingInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imagesId?: StringFieldUpdateOperationsInput | string
   }
 
   export type usersUncheckedUpdateWithoutAvatarInput = {
@@ -3663,7 +3633,6 @@ export namespace Prisma {
     following?: usersUpdatefollowingInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    imagesId?: StringFieldUpdateOperationsInput | string
   }
 
   export type imagesCreateWithoutUsersInput = {

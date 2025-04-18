@@ -124,8 +124,7 @@ exports.Prisma.UsersScalarFieldEnum = {
   password: 'password',
   following: 'following',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  imagesId: 'imagesId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {

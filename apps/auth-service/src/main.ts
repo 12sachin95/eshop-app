@@ -26,11 +26,12 @@ app.use("/docs-json", (req, res) => {
   res.send(swaggerDocument);
 });
 
-app.use(errorMiddleware);
 const port = process.env.port || 6001;
 
 // Routes
 app.use("/api", router);
+
+app.use(errorMiddleware);
 
 const server = app.listen(port, () => {
   console.log(`Auth service is running on http://localhost:${port}`);
