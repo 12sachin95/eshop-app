@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "npx nx run-many --target=serve --all"
+    "dev": "npx nx run-many --target=serve --all",
+    "clean-cache":"npx nx reset cache"
   },
   "private": true,
   "dependencies": {
