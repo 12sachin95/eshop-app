@@ -1,4 +1,4 @@
-import e, { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import {
   checkOtpResctrictions,
   handleForgotPassword,
@@ -165,7 +165,7 @@ export const resetUserPassword = async (
 
     //Compare password
     const isSamePassword = await bcrypt.compare(newPassword, user.password!);
-    if (!isSamePassword) {
+    if (isSamePassword) {
       return next(
         new AuthError("New password can not be same as old password")
       );

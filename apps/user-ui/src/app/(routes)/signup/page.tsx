@@ -100,7 +100,11 @@ const signup = () => {
     }
   };
 
-  const resendOtp = () => {};
+  const resendOtp = () => {
+    if (userData) {
+      signupMutation.mutate(userData);
+    }
+  };
 
   return (
     <div className="w-full py-10 min-h-[85vh] bg-[#f1f1f1]">
@@ -169,7 +173,7 @@ const signup = () => {
                     required: "Password is required",
                     minLength: {
                       value: 6,
-                      message: "Invalid Password address",
+                      message: "Password must be at least 6 characters",
                     },
                   })}
                 />

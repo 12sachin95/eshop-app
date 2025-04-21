@@ -32,26 +32,20 @@ export const checkOtpResctrictions = async (
   next: NextFunction
 ) => {
   if (await redis.get(`otp_lock:${email}`)) {
-    return next(
-      new ValidationError(
-        "Account locked due to multiple failed attempts!, Try again letter after 30 min"
-      )
+    throw new ValidationError(
+      "Account locked due to multiple failed attempts!, Try again letter after 30 min"
     );
   }
   if (await redis.get(`otp_spam_lock:${email}`)) {
     // when user sending again and again in every minute so it will be spam
-    return next(
-      new ValidationError(
-        "Too many OTP requests!, Try again letter after 1 hour"
-      )
+    throw new ValidationError(
+      "Too many OTP requests!, Try again letter after 1 hour"
     );
   }
 
   if (await redis.get(`otp_cooldown:${email}`)) {
-    return next(
-      new ValidationError(
-        "Please wait for 1 minute before requesting another OTP"
-      )
+    throw new ValidationError(
+      "Please wait for 1 minute before requesting another OTP"
     );
   }
 };
@@ -61,10 +55,8 @@ export const trackOtpRequests = async (email: string, next: NextFunction) => {
   let requestCount = parseInt((await redis.get(otpRequestKey)) || "0");
   if (requestCount >= 2) {
     await redis.set(`otp_spam_lock:${email}`, "locked", "EX", 3600);
-    return next(
-      new ValidationError(
-        "Too many OTP requests!, Try again letter after 1 hour"
-      )
+    throw new ValidationError(
+      "Too many OTP requests!, Try again letter after 1 hour"
     );
   }
 
@@ -135,7 +127,7 @@ export const handleForgotPassword = async (
     await trackOtpRequests(email, next);
 
     // Generate OTP and send mail
-    await sendOtp(email, user.name, "forgot-password-user-mail");
+    await sendOtp(user.name, email, "forgot-password-user-mail");
     res
       .status(200)
       .json({ message: "OTP sent to email. Please verify your emai." });
