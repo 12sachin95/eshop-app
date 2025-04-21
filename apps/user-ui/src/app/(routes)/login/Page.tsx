@@ -113,13 +113,11 @@ const LoginPage = () => {
               >
                 {passwordVisible ? <Eye /> : <EyeOff />}
               </button>
-
-              {errors.password && (
-                <p className="text-red-500 text-sm">
-                  {errors.password.message}
-                </p>
-              )}
             </div>
+
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password.message}</p>
+            )}
             <div className="flex justify-between items-center my-4">
               <label className="flex  justify-between items-center my-4">
                 <input

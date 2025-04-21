@@ -9,10 +9,12 @@ import {
 import React, { useEffect, useState } from "react";
 import { navItems } from "../../configs/constants";
 import Link from "next/link";
+import useUser from "../../hooks/useUser";
 
 const HeaderBottom = () => {
   const [show, setShow] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const { user, isLoading } = useUser();
 
   // Track scroll position
   useEffect(() => {
@@ -80,17 +82,39 @@ const HeaderBottom = () => {
           {isSticky && (
             <div className="flex items-center gap-8">
               <div className="flex items-center gap-2">
-                <Link
-                  href="/login"
-                  className="border-2 w-[50px] h-[50px] flex items-center justify-center rounded-full border-[#010f1c1a]"
-                >
-                  <User />
-                </Link>
-                <Link href="/login">
-                  <span className="block font-medium">
-                    Hello,<span className="font-semibold">Sign In</span>
-                  </span>
-                </Link>
+                {!isLoading && user ? (
+                  <>
+                    <Link
+                      href="/profile"
+                      className="border-2 w-[50px] h-[50px] flex items-center justify-center rounded-full border-[#010f1c1a]"
+                    >
+                      <User />
+                    </Link>
+                    <Link href="/profile">
+                      <span className="block font-medium">Hello,</span>
+                      <span className="font-semibold">
+                        {user?.name?.split(" ").length > 1
+                          ? user?.name?.split(" ")[1]
+                          : user?.name}
+                      </span>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href="/login"
+                      className="border-2 w-[50px] h-[50px] flex items-center justify-center rounded-full border-[#010f1c1a]"
+                    >
+                      <User />
+                    </Link>
+                    <Link href="/login">
+                      <span className="block font-medium">Hello,</span>
+                      <span className="font-semibold">
+                        {isLoading ? "..." : "Sign in"}
+                      </span>
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="flex items-center gap-5">
                 <Link href="/wishlist" className="relative">
@@ -101,7 +125,7 @@ const HeaderBottom = () => {
                 </Link>
               </div>
               <div className="flex items-center gap-5">
-                <Link href="/wishlist" className="relative">
+                <Link href="/cart" className="relative">
                   <ShoppingCart />
                   <div className="w-6 h-6 border-2 border-white rounded-full  bg-red-500 flex items-center justify-center absolute top-[-10px] right-[-10px]">
                     <span className="text-white font-medium text-sm">0</span>
