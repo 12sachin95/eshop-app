@@ -1,0 +1,5 @@
+https://console.upstash.com/login
+https://cloud.mongodb.com/v2/6800db3c45cdf62b82700be4#/metrics/replicaSet/6800db9bb38fe856320f722b/explorer/development/users/find
+https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/introduction#3-importing-prisma-client
+https://nx.dev/nx-api/next
+https://lucide.dev/icons/shopping-cart
