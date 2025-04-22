@@ -114,6 +114,7 @@ exports.Prisma.ImagesScalarFieldEnum = {
   id: 'id',
   file_id: 'file_id',
   url: 'url',
+  shopId: 'shopId',
   userId: 'userId'
 };
 
@@ -123,6 +124,46 @@ exports.Prisma.UsersScalarFieldEnum = {
   email: 'email',
   password: 'password',
   following: 'following',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ShopReviewsScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  rating: 'rating',
+  reviews: 'reviews',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  shopsId: 'shopsId'
+};
+
+exports.Prisma.ShopsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  bio: 'bio',
+  category: 'category',
+  coverBanner: 'coverBanner',
+  address: 'address',
+  opening_hours: 'opening_hours',
+  website: 'website',
+  socialLinks: 'socialLinks',
+  rating: 'rating',
+  sellerId: 'sellerId',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt'
+};
+
+exports.Prisma.SellersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone_number: 'phone_number',
+  country: 'country',
+  password: 'password',
+  stripeId: 'stripeId',
+  shopId: 'shopId',
+  shopsId: 'shopsId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -140,7 +181,10 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   images: 'images',
-  users: 'users'
+  users: 'users',
+  shopReviews: 'shopReviews',
+  shops: 'shops',
+  sellers: 'sellers'
 };
 
 /**

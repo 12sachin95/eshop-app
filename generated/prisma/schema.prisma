@@ -9,20 +9,69 @@ datasource db {
 }
 
 model images {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
   file_id String
   url     String
-  userId  String @unique @db.ObjectId
-  users   users? @relation(fields: [userId], references: [id])
+  shopId  String? @unique @db.ObjectId
+  userId  String  @unique @db.ObjectId
+  users   users?  @relation(fields: [userId], references: [id])
+  shops   shops?  @relation(fields: [shopId], references: [id])
 }
 
 model users {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String        @unique
+  password    String?
+  following   String[]
+  avatar      images?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  shopReviews shopReviews[]
+}
+
+model shopReviews {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  email     String   @unique
-  password  String?
-  following String[]
-  avatar    images?
+  userId    String   @db.ObjectId
+  user      users    @relation(fields: [userId], references: [id])
+  rating    Float
+  reviews   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  shopsId   String?  @db.ObjectId
+  shops     shops?   @relation(fields: [shopsId], references: [id])
+}
+
+model shops {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  bio           String?
+  category      String
+  avatar        images?
+  coverBanner   String?
+  address       String
+  opening_hours String?
+  website       String?
+  socialLinks   Json[]
+  rating        Float         @default(0)
+  reviews       shopReviews[]
+  sellerId      String        @unique @db.ObjectId
+  createdAt     DateTime      @default(now())
+  updateAt      DateTime      @updatedAt
+  sellers       sellers       @relation(fields: [sellerId], references: [id])
+}
+
+model sellers {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  email        String   @unique
+  phone_number String
+  country      String
+  password     String
+  stripeId     String?
+  shop         shops?
+  shopId       String?  @db.ObjectId
+  shopsId      String?  @db.ObjectId
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

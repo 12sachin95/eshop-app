@@ -1,29 +1,29 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-import GoogleButton from "apps/user-ui/src/shared/components/google-button";
+import StripeLogo from "apps/seller-ui/src/assets/StripeLogo";
+import CreateShop from "apps/seller-ui/src/shared/modules/auth/create-shop";
+import { countries } from "apps/seller-ui/src/utils/countries";
 import axios, { AxiosError } from "axios";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-type FormData = {
-  name: string;
-  email: string;
-  password: string;
-};
 const signup = () => {
+  const [activeStep, setActiveStep] = useState(1);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [canResend, setCanResend] = useState(true);
   const [showOtp, setShowOtp] = useState(false);
   const [timer, setTimer] = useState(60);
   const [otp, setOtp] = useState(["", "", "", ""]);
 
-  const [userData, setUserData] = useState<FormData | null>(null);
+  const [sellerData, setSellerData] = useState<any>(null);
+  const [sellerId, setSellerId] = useState<any>(null);
+  const [stripeConnectionError, setStripeConnectionError] =
+    useState<String | null>(null);
+
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const router = useRouter();
   const startResendTimer = () => {
     const interval = setInterval(() => {
       setTimer((prev) => {
@@ -37,15 +37,15 @@ const signup = () => {
     }, 1000);
   };
   const signupMutation = useMutation({
-    mutationFn: async (data: FormData) => {
+    mutationFn: async (data: any) => {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/user-registration`,
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/seller-registration`,
         data
       );
       return response.data;
     },
     onSuccess: (_, formData) => {
-      setUserData(formData);
+      setSellerData(formData);
       setShowOtp(true);
       setCanResend(false);
       setTimer(60);
@@ -55,28 +55,28 @@ const signup = () => {
 
   const verifyOtpMutation = useMutation({
     mutationFn: async () => {
-      if (!userData) return;
+      if (!sellerData) return;
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/verify-user`,
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/verify-seller`,
         {
-          ...userData,
+          ...sellerData,
           otp: otp.join(""),
         }
       );
       return response.data;
     },
-    onSuccess: () => {
-      router.push("/login");
+    onSuccess: (data) => {
+      setSellerId(data?.seller?.id);
+      setActiveStep(2);
     },
   });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = (data: any) => {
     signupMutation.mutate(data);
   };
   const handleOtpChange = (index: number, value: string) => {
@@ -101,39 +101,64 @@ const signup = () => {
   };
 
   const resendOtp = () => {
-    if (userData) {
-      signupMutation.mutate(userData);
+    if (sellerData) {
+      signupMutation.mutate(sellerData);
     }
   };
 
+  const connectStripeFn = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URI}/api/create-stripe-link`,
+        {
+          sellerId,
+        }
+      );
+      if (response.data?.url) {
+        window.location.href = response.data.url;
+      }
+    } catch (error: any) {
+      console.log("stripe-connection-error", error);
+      setStripeConnectionError(
+        (error?.message as string) || "Unable to connect Stripe"
+      );
+    }
+  };
   return (
-    <div className="w-full py-10 min-h-[85vh] bg-[#f1f1f1]">
-      <h1 className="text-4xl font-Poppins font-semibold text-black text-center">
-        Signup
-      </h1>
-      <p className="text-center text-lg font-medium py-3 text-[#00000099]">
-        Home . Signup
-      </p>
-      <div className="w-full flex justify-center">
-        <div className="md:w-[480px] p-8 bg-white shadow rounded-lg">
-          <h3 className="text-3xl font-semibold text-center mb2">
-            Signup to Eshop
-          </h3>
-          <p className="text-center text-gray-500 mb-4">
-            Already have an account?{" "}
-            <Link href="/login" className="text-blue-500">
-              Login
-            </Link>
-          </p>
-
-          <GoogleButton width={"20px"} height={"20px"} />
-          <div className="flex items-center my-5 text-gray-400 text-sm">
-            <div className="flex-1 border-t border-gray-300" />
-            <span className="px-3">or Sign in with Email</span>
-            <div className="flex-1 border-t border-gray-300" />
+    <div className="w-full flex flex-col items-center pt-10 min-h-screen">
+      {/*steeper */}
+      <div className="relative flex items-center justify-between md:w-[50%] mb-8">
+        <div className="absolute top-[25%] left-0 w-[80%] md:w-[90%] h-1 bg-gray-300 -z-10"></div>
+        {[1, 2, 3].map((step) => (
+          <div key={step}>
+            <div
+              className={`w-10 h-10 flex items-center justify-center rounded-full text-white font-bold
+                ${
+                  step <= 1 || activeStep >= step
+                    ? "bg-blue-400"
+                    : "bg-gray-300"
+                }`}
+            >
+              {step}
+            </div>
+            <span className="ml-[-15px] ">
+              {step === 1
+                ? "Create Account"
+                : step === 2
+                ? "Setup Shop"
+                : "Connect Bank"}
+            </span>
           </div>
-          {!showOtp ? (
+        ))}
+      </div>
+      {/* steps count */}
+      <div className="md:w-[480px] p-8 bg-white shadow rounded-lg">
+        {activeStep === 1 &&
+          (!showOtp ? (
             <form onSubmit={handleSubmit(onSubmit)}>
+              <h3 className="text-2xl font-semibold text-center mb-4">
+                Create Account
+              </h3>
               <label className="block text-gray-700 mb-1">Name</label>
               <input
                 type="text"
@@ -144,7 +169,9 @@ const signup = () => {
                 })}
               />
               {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name.message}</p>
+                <p className="text-red-500 text-sm">
+                  {errors.name?.message as string}
+                </p>
               )}
 
               <label className="block text-gray-700 mb-1">Email</label>
@@ -161,8 +188,48 @@ const signup = () => {
                 })}
               />
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+                <p className="text-red-500 text-sm">
+                  {errors.email?.message as string}
+                </p>
               )}
+
+              <label className="block text-gray-700 mb-1">Phone Number</label>
+              <input
+                type="tel"
+                placeholder="1234567890"
+                className="w-full p-2 border border-gray-300 outline-0 !rounded mb-1"
+                {...register("phone_number", {
+                  required: "Phone number is required",
+                  pattern: {
+                    value: /^\+[1-9]\d{1,14}$/,
+                    message: "Inavalid phone number format",
+                  },
+                  minLength: {
+                    value: 10,
+                    message: "Phone number cannot exceed 15 digit",
+                  },
+                })}
+              />
+              {errors.phone_number && (
+                <p className="text-red-500 text-sm">
+                  {errors.phone_number?.message as string}
+                </p>
+              )}
+
+              <label className="block text-gray-700 mb-1">Country</label>
+              <select
+                className=" w-full p-2 border border-gray-300 outline-0 !rounded mb-1"
+                {...register("country", {
+                  required: "Country is required",
+                })}
+              >
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                ))}{" "}
+              </select>
+
               <label className="block text-gray-700 mb-1">Password</label>
               <div className="relative">
                 <input
@@ -188,7 +255,7 @@ const signup = () => {
 
               {errors.password && (
                 <p className="text-red-500 text-sm">
-                  {errors.password.message}
+                  {errors.password?.message as string}
                 </p>
               )}
 
@@ -199,6 +266,19 @@ const signup = () => {
               >
                 {signupMutation.isPending ? "Signing up..." : "Signup"}
               </button>
+              {signupMutation.isError &&
+                signupMutation.error instanceof AxiosError && (
+                  <p className="text-red-500 text-sm">
+                    {(signupMutation.error.response?.data.message as string) ||
+                      signupMutation.error.message}
+                  </p>
+                )}
+              <p className="pt-3 text-center">
+                Already have an account?{" "}
+                <Link href={"/login"} className="text-blue-500">
+                  Login
+                </Link>
+              </p>
             </form>
           ) : (
             <div>
@@ -250,8 +330,28 @@ const signup = () => {
                   </p>
                 )}
             </div>
-          )}
-        </div>
+          ))}
+
+        {activeStep === 2 && (
+          <CreateShop setActiveStep={setActiveStep} sellerId={sellerId} />
+        )}
+        {activeStep === 3 && (
+          <div className="text-center">
+            <h3 className="text-2xl font-semibold">Withdraw method</h3>
+            <br />
+            <button
+              onClick={connectStripeFn}
+              className="w-full m-auto flex items-center justify-center gap-3 text-lg bg-[#334155] text-white py-2 rounded-lg"
+            >
+              Connect stripe <StripeLogo />
+            </button>
+            {stripeConnectionError && (
+              <p className="text-red-500 text-sm">
+                {stripeConnectionError as string}
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
