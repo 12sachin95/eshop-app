@@ -162,8 +162,6 @@ exports.Prisma.SellersScalarFieldEnum = {
   country: 'country',
   password: 'password',
   stripeId: 'stripeId',
-  shopId: 'shopId',
-  shopsId: 'shopsId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

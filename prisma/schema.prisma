@@ -70,8 +70,6 @@ model sellers {
   password     String
   stripeId     String?
   shop         shops?
-  shopId       String?  @db.ObjectId
-  shopsId      String?  @db.ObjectId
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }

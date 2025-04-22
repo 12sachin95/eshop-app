@@ -5541,8 +5541,6 @@ export namespace Prisma {
     country: string | null
     password: string | null
     stripeId: string | null
-    shopId: string | null
-    shopsId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5555,8 +5553,6 @@ export namespace Prisma {
     country: string | null
     password: string | null
     stripeId: string | null
-    shopId: string | null
-    shopsId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5569,8 +5565,6 @@ export namespace Prisma {
     country: number
     password: number
     stripeId: number
-    shopId: number
-    shopsId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5585,8 +5579,6 @@ export namespace Prisma {
     country?: true
     password?: true
     stripeId?: true
-    shopId?: true
-    shopsId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5599,8 +5591,6 @@ export namespace Prisma {
     country?: true
     password?: true
     stripeId?: true
-    shopId?: true
-    shopsId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5613,8 +5603,6 @@ export namespace Prisma {
     country?: true
     password?: true
     stripeId?: true
-    shopId?: true
-    shopsId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5700,8 +5688,6 @@ export namespace Prisma {
     country: string
     password: string
     stripeId: string | null
-    shopId: string | null
-    shopsId: string | null
     createdAt: Date
     updatedAt: Date
     _count: SellersCountAggregateOutputType | null
@@ -5731,8 +5717,6 @@ export namespace Prisma {
     country?: boolean
     password?: boolean
     stripeId?: boolean
-    shopId?: boolean
-    shopsId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     shop?: boolean | sellers$shopArgs<ExtArgs>
@@ -5748,13 +5732,11 @@ export namespace Prisma {
     country?: boolean
     password?: boolean
     stripeId?: boolean
-    shopId?: boolean
-    shopsId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type sellersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone_number" | "country" | "password" | "stripeId" | "shopId" | "shopsId" | "createdAt" | "updatedAt", ExtArgs["result"]["sellers"]>
+  export type sellersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone_number" | "country" | "password" | "stripeId" | "createdAt" | "updatedAt", ExtArgs["result"]["sellers"]>
   export type sellersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     shop?: boolean | sellers$shopArgs<ExtArgs>
   }
@@ -5772,8 +5754,6 @@ export namespace Prisma {
       country: string
       password: string
       stripeId: string | null
-      shopId: string | null
-      shopsId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["sellers"]>
@@ -6176,8 +6156,6 @@ export namespace Prisma {
     readonly country: FieldRef<"sellers", 'String'>
     readonly password: FieldRef<"sellers", 'String'>
     readonly stripeId: FieldRef<"sellers", 'String'>
-    readonly shopId: FieldRef<"sellers", 'String'>
-    readonly shopsId: FieldRef<"sellers", 'String'>
     readonly createdAt: FieldRef<"sellers", 'DateTime'>
     readonly updatedAt: FieldRef<"sellers", 'DateTime'>
   }
@@ -6655,8 +6633,6 @@ export namespace Prisma {
     country: 'country',
     password: 'password',
     stripeId: 'stripeId',
-    shopId: 'shopId',
-    shopsId: 'shopsId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7068,8 +7044,6 @@ export namespace Prisma {
     country?: StringFilter<"sellers"> | string
     password?: StringFilter<"sellers"> | string
     stripeId?: StringNullableFilter<"sellers"> | string | null
-    shopId?: StringNullableFilter<"sellers"> | string | null
-    shopsId?: StringNullableFilter<"sellers"> | string | null
     createdAt?: DateTimeFilter<"sellers"> | Date | string
     updatedAt?: DateTimeFilter<"sellers"> | Date | string
     shop?: XOR<ShopsNullableScalarRelationFilter, shopsWhereInput> | null
@@ -7083,8 +7057,6 @@ export namespace Prisma {
     country?: SortOrder
     password?: SortOrder
     stripeId?: SortOrder
-    shopId?: SortOrder
-    shopsId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     shop?: shopsOrderByWithRelationInput
@@ -7101,8 +7073,6 @@ export namespace Prisma {
     country?: StringFilter<"sellers"> | string
     password?: StringFilter<"sellers"> | string
     stripeId?: StringNullableFilter<"sellers"> | string | null
-    shopId?: StringNullableFilter<"sellers"> | string | null
-    shopsId?: StringNullableFilter<"sellers"> | string | null
     createdAt?: DateTimeFilter<"sellers"> | Date | string
     updatedAt?: DateTimeFilter<"sellers"> | Date | string
     shop?: XOR<ShopsNullableScalarRelationFilter, shopsWhereInput> | null
@@ -7116,8 +7086,6 @@ export namespace Prisma {
     country?: SortOrder
     password?: SortOrder
     stripeId?: SortOrder
-    shopId?: SortOrder
-    shopsId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: sellersCountOrderByAggregateInput
@@ -7136,8 +7104,6 @@ export namespace Prisma {
     country?: StringWithAggregatesFilter<"sellers"> | string
     password?: StringWithAggregatesFilter<"sellers"> | string
     stripeId?: StringNullableWithAggregatesFilter<"sellers"> | string | null
-    shopId?: StringNullableWithAggregatesFilter<"sellers"> | string | null
-    shopsId?: StringNullableWithAggregatesFilter<"sellers"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"sellers"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"sellers"> | Date | string
   }
@@ -7453,8 +7419,6 @@ export namespace Prisma {
     country: string
     password: string
     stripeId?: string | null
-    shopId?: string | null
-    shopsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     shop?: shopsCreateNestedOneWithoutSellersInput
@@ -7468,8 +7432,6 @@ export namespace Prisma {
     country: string
     password: string
     stripeId?: string | null
-    shopId?: string | null
-    shopsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     shop?: shopsUncheckedCreateNestedOneWithoutSellersInput
@@ -7482,8 +7444,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     stripeId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     shop?: shopsUpdateOneWithoutSellersNestedInput
@@ -7496,8 +7456,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     stripeId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     shop?: shopsUncheckedUpdateOneWithoutSellersNestedInput
@@ -7511,8 +7469,6 @@ export namespace Prisma {
     country: string
     password: string
     stripeId?: string | null
-    shopId?: string | null
-    shopsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7524,8 +7480,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     stripeId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7537,8 +7491,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     stripeId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7872,8 +7824,6 @@ export namespace Prisma {
     country?: SortOrder
     password?: SortOrder
     stripeId?: SortOrder
-    shopId?: SortOrder
-    shopsId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7886,8 +7836,6 @@ export namespace Prisma {
     country?: SortOrder
     password?: SortOrder
     stripeId?: SortOrder
-    shopId?: SortOrder
-    shopsId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7900,8 +7848,6 @@ export namespace Prisma {
     country?: SortOrder
     password?: SortOrder
     stripeId?: SortOrder
-    shopId?: SortOrder
-    shopsId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8772,8 +8718,6 @@ export namespace Prisma {
     country: string
     password: string
     stripeId?: string | null
-    shopId?: string | null
-    shopsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8786,8 +8730,6 @@ export namespace Prisma {
     country: string
     password: string
     stripeId?: string | null
-    shopId?: string | null
-    shopsId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8854,8 +8796,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     stripeId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8867,8 +8807,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     stripeId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopId?: NullableStringFieldUpdateOperationsInput | string | null
-    shopsId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
