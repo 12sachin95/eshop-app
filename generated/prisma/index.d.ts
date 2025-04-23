@@ -38,6 +38,11 @@ export type shops = $Result.DefaultSelection<Prisma.$shopsPayload>
  * 
  */
 export type sellers = $Result.DefaultSelection<Prisma.$sellersPayload>
+/**
+ * Model site_config
+ * 
+ */
+export type site_config = $Result.DefaultSelection<Prisma.$site_configPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -180,6 +185,16 @@ export class PrismaClient<
     * ```
     */
   get sellers(): Prisma.sellersDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.site_config`: Exposes CRUD operations for the **site_config** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Site_configs
+    * const site_configs = await prisma.site_config.findMany()
+    * ```
+    */
+  get site_config(): Prisma.site_configDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -624,7 +639,8 @@ export namespace Prisma {
     users: 'users',
     shopReviews: 'shopReviews',
     shops: 'shops',
-    sellers: 'sellers'
+    sellers: 'sellers',
+    site_config: 'site_config'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -643,7 +659,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "images" | "users" | "shopReviews" | "shops" | "sellers"
+      modelProps: "images" | "users" | "shopReviews" | "shops" | "sellers" | "site_config"
       txIsolationLevel: never
     }
     model: {
@@ -1017,6 +1033,80 @@ export namespace Prisma {
           }
         }
       }
+      site_config: {
+        payload: Prisma.$site_configPayload<ExtArgs>
+        fields: Prisma.site_configFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.site_configFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.site_configFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>
+          }
+          findFirst: {
+            args: Prisma.site_configFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.site_configFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>
+          }
+          findMany: {
+            args: Prisma.site_configFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>[]
+          }
+          create: {
+            args: Prisma.site_configCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>
+          }
+          createMany: {
+            args: Prisma.site_configCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.site_configDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>
+          }
+          update: {
+            args: Prisma.site_configUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>
+          }
+          deleteMany: {
+            args: Prisma.site_configDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.site_configUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.site_configUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$site_configPayload>
+          }
+          aggregate: {
+            args: Prisma.Site_configAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSite_config>
+          }
+          groupBy: {
+            args: Prisma.site_configGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Site_configGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.site_configFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.site_configAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.site_configCountArgs<ExtArgs>
+            result: $Utils.Optional<Site_configCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1093,6 +1183,7 @@ export namespace Prisma {
     shopReviews?: shopReviewsOmit
     shops?: shopsOmit
     sellers?: sellersOmit
+    site_config?: site_configOmit
   }
 
   /* Types for Logging */
@@ -6566,6 +6657,908 @@ export namespace Prisma {
 
 
   /**
+   * Model site_config
+   */
+
+  export type AggregateSite_config = {
+    _count: Site_configCountAggregateOutputType | null
+    _min: Site_configMinAggregateOutputType | null
+    _max: Site_configMaxAggregateOutputType | null
+  }
+
+  export type Site_configMinAggregateOutputType = {
+    id: string | null
+  }
+
+  export type Site_configMaxAggregateOutputType = {
+    id: string | null
+  }
+
+  export type Site_configCountAggregateOutputType = {
+    id: number
+    categories: number
+    subCategories: number
+    _all: number
+  }
+
+
+  export type Site_configMinAggregateInputType = {
+    id?: true
+  }
+
+  export type Site_configMaxAggregateInputType = {
+    id?: true
+  }
+
+  export type Site_configCountAggregateInputType = {
+    id?: true
+    categories?: true
+    subCategories?: true
+    _all?: true
+  }
+
+  export type Site_configAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which site_config to aggregate.
+     */
+    where?: site_configWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of site_configs to fetch.
+     */
+    orderBy?: site_configOrderByWithRelationInput | site_configOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: site_configWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` site_configs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` site_configs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned site_configs
+    **/
+    _count?: true | Site_configCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Site_configMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Site_configMaxAggregateInputType
+  }
+
+  export type GetSite_configAggregateType<T extends Site_configAggregateArgs> = {
+        [P in keyof T & keyof AggregateSite_config]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSite_config[P]>
+      : GetScalarType<T[P], AggregateSite_config[P]>
+  }
+
+
+
+
+  export type site_configGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: site_configWhereInput
+    orderBy?: site_configOrderByWithAggregationInput | site_configOrderByWithAggregationInput[]
+    by: Site_configScalarFieldEnum[] | Site_configScalarFieldEnum
+    having?: site_configScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Site_configCountAggregateInputType | true
+    _min?: Site_configMinAggregateInputType
+    _max?: Site_configMaxAggregateInputType
+  }
+
+  export type Site_configGroupByOutputType = {
+    id: string
+    categories: string[]
+    subCategories: JsonValue
+    _count: Site_configCountAggregateOutputType | null
+    _min: Site_configMinAggregateOutputType | null
+    _max: Site_configMaxAggregateOutputType | null
+  }
+
+  type GetSite_configGroupByPayload<T extends site_configGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Site_configGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Site_configGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Site_configGroupByOutputType[P]>
+            : GetScalarType<T[P], Site_configGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type site_configSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    categories?: boolean
+    subCategories?: boolean
+  }, ExtArgs["result"]["site_config"]>
+
+
+
+  export type site_configSelectScalar = {
+    id?: boolean
+    categories?: boolean
+    subCategories?: boolean
+  }
+
+  export type site_configOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "categories" | "subCategories", ExtArgs["result"]["site_config"]>
+
+  export type $site_configPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "site_config"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      categories: string[]
+      subCategories: Prisma.JsonValue
+    }, ExtArgs["result"]["site_config"]>
+    composites: {}
+  }
+
+  type site_configGetPayload<S extends boolean | null | undefined | site_configDefaultArgs> = $Result.GetResult<Prisma.$site_configPayload, S>
+
+  type site_configCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<site_configFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Site_configCountAggregateInputType | true
+    }
+
+  export interface site_configDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['site_config'], meta: { name: 'site_config' } }
+    /**
+     * Find zero or one Site_config that matches the filter.
+     * @param {site_configFindUniqueArgs} args - Arguments to find a Site_config
+     * @example
+     * // Get one Site_config
+     * const site_config = await prisma.site_config.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends site_configFindUniqueArgs>(args: SelectSubset<T, site_configFindUniqueArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Site_config that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {site_configFindUniqueOrThrowArgs} args - Arguments to find a Site_config
+     * @example
+     * // Get one Site_config
+     * const site_config = await prisma.site_config.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends site_configFindUniqueOrThrowArgs>(args: SelectSubset<T, site_configFindUniqueOrThrowArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Site_config that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {site_configFindFirstArgs} args - Arguments to find a Site_config
+     * @example
+     * // Get one Site_config
+     * const site_config = await prisma.site_config.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends site_configFindFirstArgs>(args?: SelectSubset<T, site_configFindFirstArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Site_config that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {site_configFindFirstOrThrowArgs} args - Arguments to find a Site_config
+     * @example
+     * // Get one Site_config
+     * const site_config = await prisma.site_config.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends site_configFindFirstOrThrowArgs>(args?: SelectSubset<T, site_configFindFirstOrThrowArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Site_configs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {site_configFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Site_configs
+     * const site_configs = await prisma.site_config.findMany()
+     * 
+     * // Get first 10 Site_configs
+     * const site_configs = await prisma.site_config.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const site_configWithIdOnly = await prisma.site_config.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends site_configFindManyArgs>(args?: SelectSubset<T, site_configFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Site_config.
+     * @param {site_configCreateArgs} args - Arguments to create a Site_config.
+     * @example
+     * // Create one Site_config
+     * const Site_config = await prisma.site_config.create({
+     *   data: {
+     *     // ... data to create a Site_config
+     *   }
+     * })
+     * 
+     */
+    create<T extends site_configCreateArgs>(args: SelectSubset<T, site_configCreateArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Site_configs.
+     * @param {site_configCreateManyArgs} args - Arguments to create many Site_configs.
+     * @example
+     * // Create many Site_configs
+     * const site_config = await prisma.site_config.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends site_configCreateManyArgs>(args?: SelectSubset<T, site_configCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Site_config.
+     * @param {site_configDeleteArgs} args - Arguments to delete one Site_config.
+     * @example
+     * // Delete one Site_config
+     * const Site_config = await prisma.site_config.delete({
+     *   where: {
+     *     // ... filter to delete one Site_config
+     *   }
+     * })
+     * 
+     */
+    delete<T extends site_configDeleteArgs>(args: SelectSubset<T, site_configDeleteArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Site_config.
+     * @param {site_configUpdateArgs} args - Arguments to update one Site_config.
+     * @example
+     * // Update one Site_config
+     * const site_config = await prisma.site_config.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends site_configUpdateArgs>(args: SelectSubset<T, site_configUpdateArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Site_configs.
+     * @param {site_configDeleteManyArgs} args - Arguments to filter Site_configs to delete.
+     * @example
+     * // Delete a few Site_configs
+     * const { count } = await prisma.site_config.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends site_configDeleteManyArgs>(args?: SelectSubset<T, site_configDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Site_configs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {site_configUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Site_configs
+     * const site_config = await prisma.site_config.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends site_configUpdateManyArgs>(args: SelectSubset<T, site_configUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Site_config.
+     * @param {site_configUpsertArgs} args - Arguments to update or create a Site_config.
+     * @example
+     * // Update or create a Site_config
+     * const site_config = await prisma.site_config.upsert({
+     *   create: {
+     *     // ... data to create a Site_config
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Site_config we want to update
+     *   }
+     * })
+     */
+    upsert<T extends site_configUpsertArgs>(args: SelectSubset<T, site_configUpsertArgs<ExtArgs>>): Prisma__site_configClient<$Result.GetResult<Prisma.$site_configPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Site_configs that matches the filter.
+     * @param {site_configFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const site_config = await prisma.site_config.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: site_configFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Site_config.
+     * @param {site_configAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const site_config = await prisma.site_config.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: site_configAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of Site_configs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {site_configCountArgs} args - Arguments to filter Site_configs to count.
+     * @example
+     * // Count the number of Site_configs
+     * const count = await prisma.site_config.count({
+     *   where: {
+     *     // ... the filter for the Site_configs we want to count
+     *   }
+     * })
+    **/
+    count<T extends site_configCountArgs>(
+      args?: Subset<T, site_configCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Site_configCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Site_config.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Site_configAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Site_configAggregateArgs>(args: Subset<T, Site_configAggregateArgs>): Prisma.PrismaPromise<GetSite_configAggregateType<T>>
+
+    /**
+     * Group by Site_config.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {site_configGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends site_configGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: site_configGroupByArgs['orderBy'] }
+        : { orderBy?: site_configGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, site_configGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSite_configGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the site_config model
+   */
+  readonly fields: site_configFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for site_config.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__site_configClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the site_config model
+   */
+  interface site_configFieldRefs {
+    readonly id: FieldRef<"site_config", 'String'>
+    readonly categories: FieldRef<"site_config", 'String[]'>
+    readonly subCategories: FieldRef<"site_config", 'Json'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * site_config findUnique
+   */
+  export type site_configFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * Filter, which site_config to fetch.
+     */
+    where: site_configWhereUniqueInput
+  }
+
+  /**
+   * site_config findUniqueOrThrow
+   */
+  export type site_configFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * Filter, which site_config to fetch.
+     */
+    where: site_configWhereUniqueInput
+  }
+
+  /**
+   * site_config findFirst
+   */
+  export type site_configFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * Filter, which site_config to fetch.
+     */
+    where?: site_configWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of site_configs to fetch.
+     */
+    orderBy?: site_configOrderByWithRelationInput | site_configOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for site_configs.
+     */
+    cursor?: site_configWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` site_configs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` site_configs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of site_configs.
+     */
+    distinct?: Site_configScalarFieldEnum | Site_configScalarFieldEnum[]
+  }
+
+  /**
+   * site_config findFirstOrThrow
+   */
+  export type site_configFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * Filter, which site_config to fetch.
+     */
+    where?: site_configWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of site_configs to fetch.
+     */
+    orderBy?: site_configOrderByWithRelationInput | site_configOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for site_configs.
+     */
+    cursor?: site_configWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` site_configs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` site_configs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of site_configs.
+     */
+    distinct?: Site_configScalarFieldEnum | Site_configScalarFieldEnum[]
+  }
+
+  /**
+   * site_config findMany
+   */
+  export type site_configFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * Filter, which site_configs to fetch.
+     */
+    where?: site_configWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of site_configs to fetch.
+     */
+    orderBy?: site_configOrderByWithRelationInput | site_configOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing site_configs.
+     */
+    cursor?: site_configWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` site_configs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` site_configs.
+     */
+    skip?: number
+    distinct?: Site_configScalarFieldEnum | Site_configScalarFieldEnum[]
+  }
+
+  /**
+   * site_config create
+   */
+  export type site_configCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * The data needed to create a site_config.
+     */
+    data: XOR<site_configCreateInput, site_configUncheckedCreateInput>
+  }
+
+  /**
+   * site_config createMany
+   */
+  export type site_configCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many site_configs.
+     */
+    data: site_configCreateManyInput | site_configCreateManyInput[]
+  }
+
+  /**
+   * site_config update
+   */
+  export type site_configUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * The data needed to update a site_config.
+     */
+    data: XOR<site_configUpdateInput, site_configUncheckedUpdateInput>
+    /**
+     * Choose, which site_config to update.
+     */
+    where: site_configWhereUniqueInput
+  }
+
+  /**
+   * site_config updateMany
+   */
+  export type site_configUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update site_configs.
+     */
+    data: XOR<site_configUpdateManyMutationInput, site_configUncheckedUpdateManyInput>
+    /**
+     * Filter which site_configs to update
+     */
+    where?: site_configWhereInput
+    /**
+     * Limit how many site_configs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * site_config upsert
+   */
+  export type site_configUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * The filter to search for the site_config to update in case it exists.
+     */
+    where: site_configWhereUniqueInput
+    /**
+     * In case the site_config found by the `where` argument doesn't exist, create a new site_config with this data.
+     */
+    create: XOR<site_configCreateInput, site_configUncheckedCreateInput>
+    /**
+     * In case the site_config was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<site_configUpdateInput, site_configUncheckedUpdateInput>
+  }
+
+  /**
+   * site_config delete
+   */
+  export type site_configDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+    /**
+     * Filter which site_config to delete.
+     */
+    where: site_configWhereUniqueInput
+  }
+
+  /**
+   * site_config deleteMany
+   */
+  export type site_configDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which site_configs to delete
+     */
+    where?: site_configWhereInput
+    /**
+     * Limit how many site_configs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * site_config findRaw
+   */
+  export type site_configFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * site_config aggregateRaw
+   */
+  export type site_configAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * site_config without action
+   */
+  export type site_configDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the site_config
+     */
+    select?: site_configSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the site_config
+     */
+    omit?: site_configOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6638,6 +7631,15 @@ export namespace Prisma {
   };
 
   export type SellersScalarFieldEnum = (typeof SellersScalarFieldEnum)[keyof typeof SellersScalarFieldEnum]
+
+
+  export const Site_configScalarFieldEnum: {
+    id: 'id',
+    categories: 'categories',
+    subCategories: 'subCategories'
+  };
+
+  export type Site_configScalarFieldEnum = (typeof Site_configScalarFieldEnum)[keyof typeof Site_configScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7108,6 +8110,48 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"sellers"> | Date | string
   }
 
+  export type site_configWhereInput = {
+    AND?: site_configWhereInput | site_configWhereInput[]
+    OR?: site_configWhereInput[]
+    NOT?: site_configWhereInput | site_configWhereInput[]
+    id?: StringFilter<"site_config"> | string
+    categories?: StringNullableListFilter<"site_config">
+    subCategories?: JsonFilter<"site_config">
+  }
+
+  export type site_configOrderByWithRelationInput = {
+    id?: SortOrder
+    categories?: SortOrder
+    subCategories?: SortOrder
+  }
+
+  export type site_configWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: site_configWhereInput | site_configWhereInput[]
+    OR?: site_configWhereInput[]
+    NOT?: site_configWhereInput | site_configWhereInput[]
+    categories?: StringNullableListFilter<"site_config">
+    subCategories?: JsonFilter<"site_config">
+  }, "id">
+
+  export type site_configOrderByWithAggregationInput = {
+    id?: SortOrder
+    categories?: SortOrder
+    subCategories?: SortOrder
+    _count?: site_configCountOrderByAggregateInput
+    _max?: site_configMaxOrderByAggregateInput
+    _min?: site_configMinOrderByAggregateInput
+  }
+
+  export type site_configScalarWhereWithAggregatesInput = {
+    AND?: site_configScalarWhereWithAggregatesInput | site_configScalarWhereWithAggregatesInput[]
+    OR?: site_configScalarWhereWithAggregatesInput[]
+    NOT?: site_configScalarWhereWithAggregatesInput | site_configScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"site_config"> | string
+    categories?: StringNullableListFilter<"site_config">
+    subCategories?: JsonWithAggregatesFilter<"site_config">
+  }
+
   export type imagesCreateInput = {
     id?: string
     file_id: string
@@ -7495,6 +8539,44 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type site_configCreateInput = {
+    id?: string
+    categories?: site_configCreatecategoriesInput | string[]
+    subCategories: InputJsonValue
+  }
+
+  export type site_configUncheckedCreateInput = {
+    id?: string
+    categories?: site_configCreatecategoriesInput | string[]
+    subCategories: InputJsonValue
+  }
+
+  export type site_configUpdateInput = {
+    categories?: site_configUpdatecategoriesInput | string[]
+    subCategories?: InputJsonValue | InputJsonValue
+  }
+
+  export type site_configUncheckedUpdateInput = {
+    categories?: site_configUpdatecategoriesInput | string[]
+    subCategories?: InputJsonValue | InputJsonValue
+  }
+
+  export type site_configCreateManyInput = {
+    id?: string
+    categories?: site_configCreatecategoriesInput | string[]
+    subCategories: InputJsonValue
+  }
+
+  export type site_configUpdateManyMutationInput = {
+    categories?: site_configUpdatecategoriesInput | string[]
+    subCategories?: InputJsonValue | InputJsonValue
+  }
+
+  export type site_configUncheckedUpdateManyInput = {
+    categories?: site_configUpdatecategoriesInput | string[]
+    subCategories?: InputJsonValue | InputJsonValue
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -7851,6 +8933,45 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+  }
+
+  export type site_configCountOrderByAggregateInput = {
+    id?: SortOrder
+    categories?: SortOrder
+    subCategories?: SortOrder
+  }
+
+  export type site_configMaxOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type site_configMinOrderByAggregateInput = {
+    id?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
 
   export type usersCreateNestedOneWithoutAvatarInput = {
     create?: XOR<usersCreateWithoutAvatarInput, usersUncheckedCreateWithoutAvatarInput>
@@ -8147,6 +9268,15 @@ export namespace Prisma {
     update?: XOR<XOR<shopsUpdateToOneWithWhereWithoutSellersInput, shopsUpdateWithoutSellersInput>, shopsUncheckedUpdateWithoutSellersInput>
   }
 
+  export type site_configCreatecategoriesInput = {
+    set: string[]
+  }
+
+  export type site_configUpdatecategoriesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8284,6 +9414,17 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
   }
 
   export type usersCreateWithoutAvatarInput = {
