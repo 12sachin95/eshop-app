@@ -1,12 +1,15 @@
 "use client";
+import { useQuery } from "@tanstack/react-query";
 import ImagePlaceholder from "apps/seller-ui/src/shared/componens/image-placeholder";
+import axiosInstance from "apps/seller-ui/src/utils/axiosInstance";
 import { ChevronRight } from "lucide-react";
 import ColorSelector from "packages/components/color-selector";
 import CustomProperties from "packages/components/custom-properties";
 import CustomSpecifications from "packages/components/custom-specifications";
 import Input from "packages/components/input";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import RichtextEditor from "packages/components/rich-text-editor";
+import React, { useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 const Page = () => {
   const {
@@ -20,9 +23,32 @@ const Page = () => {
 
   const [openImageModal, setOpenImageModal] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [isChanged, setIsChanged] = useState(false);
   const [images, setImages] = useState<(File | null)[]>([null]);
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      try {
+        const res = await axiosInstance.get("/product/api/get-categories");
+        return res.data;
+      } catch (error) {
+        console.log("Error getCategory:", error);
+      }
+    },
+    staleTime: 1000 * 60 * 5,
+    retry: 2,
+  });
+
+  const categories = data?.categories || [];
+  const subCategoriesData = data?.subCategories || [];
+
+  const selectedCategory = watch("category");
+  const regularPrice = watch("regular_price");
+
+  const subCategories = useMemo(() => {
+    return selectedCategory ? subCategoriesData[selectedCategory] || [] : [];
+  }, [selectedCategory, subCategoriesData]);
 
   const onSubmit = (data: any) => {
     console.log(data);
@@ -230,7 +256,7 @@ const Page = () => {
                     required: "Cash on Delivery is required",
                   })}
                   defaultValue="yes"
-                  className="w-full border outline-none border-gray-700 bg-transparent "
+                  className="w-full border outline-none border-gray-700 bg-transparent p-1"
                 >
                   <option value="yes" className="bg-black">
                     Yes
@@ -251,6 +277,118 @@ const Page = () => {
               <label className="block font-semibold text-gray-300 mb-1">
                 Category *
               </label>
+
+              {isLoading ? (
+                <p className="text-gray-400">Loading categories...</p>
+              ) : isError ? (
+                <p className="text-red-500"> Failed to load categories</p>
+              ) : (
+                <>
+                  <Controller
+                    name="category"
+                    control={control}
+                    rules={{ required: "category is required!" }}
+                    render={({ field }) => {
+                      return (
+                        <select
+                          {...field}
+                          className="w-full border outline-none border-gray-700 bg-transparent p-1"
+                        >
+                          <option value="" className="bg-black">
+                            Select Category
+                          </option>
+                          {categories?.map((category: string) => {
+                            return (
+                              <option value={category} className="bg-black">
+                                {category}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      );
+                    }}
+                  />
+                </>
+              )}
+              {errors?.category && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.category.message as string}
+                </p>
+              )}
+              <div className="mt-2">
+                <label className="block font-semibold text-gray-300 mb-1 ">
+                  Sub Category *
+                </label>
+
+                {isLoading ? (
+                  <p className="text-gray-400">Loading sub categories...</p>
+                ) : isError ? (
+                  <p className="text-red-500"> Failed to load sub categories</p>
+                ) : (
+                  <>
+                    <Controller
+                      name="subCategory"
+                      control={control}
+                      rules={{ required: "subCategory is required!" }}
+                      render={({ field }) => {
+                        return (
+                          <select
+                            {...field}
+                            className="w-full border outline-none border-gray-700 bg-transparent p-1"
+                          >
+                            <option value="" className="bg-black">
+                              Select Sub Category
+                            </option>
+                            {subCategories?.map((subCategory: string) => {
+                              return (
+                                <option
+                                  value={subCategory}
+                                  className="bg-black"
+                                >
+                                  {subCategory}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        );
+                      }}
+                    />
+                  </>
+                )}
+                {errors?.subCategory && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.subCategory.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-2">
+                <label className="block font-semibold text-gray-300 mb-1">
+                  Detailed Description * (Min 100 words)
+                </label>
+                <Controller
+                  name="detailed_description"
+                  control={control}
+                  rules={{
+                    required: "Detailed description is required!",
+                    validate: (value) => {
+                      const wordCount = value.trim().split(/\s+/).length;
+                      return (
+                        wordCount <= 150 ||
+                        "Description must be less than 150 words"
+                      );
+                    },
+                  }}
+                  render={({ field }) => {
+                    return (
+                      <RichtextEditor
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    );
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
