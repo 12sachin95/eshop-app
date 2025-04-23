@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import { errorMiddleware } from "@packages/error-handler/error-middleware";
 import cookieParser from "cookie-parser";
-import swaggerUi from "swagger-ui-express";
 import router from "./routes/product.routes";
-// const swaggerDocument = require("./swagger-output.json");
+import swaggerUi from "swagger-ui-express";
+const swaggerDocument = require("./swagger-output.json");
 
 const app = express();
 app.use(
@@ -21,10 +21,10 @@ app.get("/", (req, res) => {
   res.send({ message: "Hello Product API" });
 });
 
-// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use("/docs-json", (req, res) => {
-//   res.send(swaggerDocument);
-// });
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/docs-json", (req, res) => {
+  res.send(swaggerDocument);
+});
 
 const port = process.env.port || 6002;
 
