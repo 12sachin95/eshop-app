@@ -8,6 +8,7 @@ import CustomProperties from "packages/components/custom-properties";
 import CustomSpecifications from "packages/components/custom-specifications";
 import Input from "packages/components/input";
 import RichtextEditor from "packages/components/rich-text-editor";
+import SizeSelector from "packages/components/size-selector";
 import React, { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -23,7 +24,7 @@ const Page = () => {
 
   const [openImageModal, setOpenImageModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isChanged, setIsChanged] = useState(false);
+  const [isChanged, setIsChanged] = useState(true);
   const [images, setImages] = useState<(File | null)[]>([null]);
 
   const { data, isLoading, isError, error } = useQuery({
@@ -82,6 +83,9 @@ const Page = () => {
     });
     setValue("images", images);
   };
+
+  const handleSaveDraft = () => {};
+
   return (
     <form
       className="w-full mx-auto p-8 shadow-md rounded-lg text-white"
@@ -299,7 +303,11 @@ const Page = () => {
                           </option>
                           {categories?.map((category: string) => {
                             return (
-                              <option value={category} className="bg-black">
+                              <option
+                                value={category}
+                                className="bg-black"
+                                key={category}
+                              >
                                 {category}
                               </option>
                             );
@@ -388,10 +396,113 @@ const Page = () => {
                     );
                   }}
                 />
+                {errors?.detailed_description && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.detailed_description.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-2">
+                <Input
+                  label="Video URL"
+                  placeholder="https://www.youtube.com/embed/xyz"
+                  {...register("video_url", {
+                    pattern: {
+                      value:
+                        /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|shorts\/))([a-zA-Z0-9_-]{11})/,
+                      message: "Invalid youtube embed url",
+                    },
+                  })}
+                />
+                {errors?.video_url && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.video_url.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-2">
+                <Input
+                  label="Sale Price *"
+                  placeholder="15$"
+                  {...register("sale_price", {
+                    required: "Sale Price is required!",
+                    valueAsNumber: true,
+                    min: { value: 1, message: "Sale Price must be at least 1" },
+                    validate: (value) => {
+                      if (isNaN(value)) return "Only numbers are valid";
+                      if (regularPrice && value >= regularPrice) {
+                        return "Sale Price must be less than Regular Price";
+                      }
+                      return true;
+                    },
+                  })}
+                />
+                {errors?.sale_price && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.sale_price.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-2">
+                <Input
+                  label="Stock *"
+                  placeholder="100"
+                  {...register("stock", {
+                    required: "Stock is required!",
+                    valueAsNumber: true,
+                    min: { value: 1, message: "Stock must be at least 1" },
+                    max: { value: 1000, message: "Stock can not exceed 1000" },
+
+                    validate: (value) => {
+                      if (isNaN(value)) return "Only numbers are allowed";
+                      if (!Number.isInteger(value)) {
+                        return "Stock must be whole number";
+                      }
+                      return true;
+                    },
+                  })}
+                />
+                {errors?.stock && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.stock.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-2">
+                <SizeSelector control={control} errors={errors} />
+              </div>
+
+              <div className="mt-3">
+                <label className="blocl font-semibold text-gray-300 mb">
+                  Select Discount Codes (optional)
+                </label>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="mt-6 flex justify-end gap-3">
+        {isChanged && (
+          <button
+            type="button"
+            onClick={handleSaveDraft}
+            className="px-4 py-2 bg-gray-700 text-white rounded-md"
+          >
+            Save Draft
+          </button>
+        )}
+        <button
+          type="submit"
+          //   onClick={handleSaveDraft}
+          className="px-4 py-2 bg-blue-600 text-white rounded-md"
+          disabled={loading}
+        >
+          {loading ? "Creating..." : "Create"}
+        </button>
       </div>
     </form>
   );

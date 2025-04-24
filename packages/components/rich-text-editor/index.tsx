@@ -18,7 +18,7 @@ const RichtextEditor = ({
       quillRef.current = true; // mark as mounted
 
       setTimeout(() => {
-        document.querySelectorAll(".ql-toolbar").forEach((toolbar, index) => {
+        document?.querySelectorAll(".ql-toolbar")?.forEach((toolbar, index) => {
           if (index > 0) {
             toolbar.remove();
           }
