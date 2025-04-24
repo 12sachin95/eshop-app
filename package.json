@@ -10,7 +10,7 @@
     "user-ui": "npx nx run-many --target=dev --all --projects=user-ui",
     "seller-ui": "npx nx run-many --target=dev --all --projects=seller-ui",
     "update-prisma": "npx prisma db push",
-    "kill-port": "npx kill-port 6001"
+    "kill-port": "npx kill-port 6001 6002 8080"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
     "express": "^4.21.2",
     "express-http-proxy": "^2.1.1",
     "express-rate-limit": "^7.5.0",
+    "imagekit": "^6.0.0",
     "ioredis": "^5.6.1",
     "jotai": "^2.12.3",
     "jsonwebtoken": "^9.0.2",

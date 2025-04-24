@@ -18,7 +18,7 @@ const Page = () => {
   const queryClient = useQueryClient();
 
   const {
-    data: discountCodes,
+    data: discountCodes = [],
     isLoading,
     isError,
   } = useQuery({

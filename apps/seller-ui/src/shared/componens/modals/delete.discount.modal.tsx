@@ -15,7 +15,10 @@ const DeleteDiscountModal = ({
       <div className="bg-gray-800 p-6 rounded-lg w-[450px] shadow-lg">
         <div className="flex justify-between items-center border-b border-gray-700 pb-3">
           <h3 className="text-xl text-white">Delete Discount Code</h3>
-          <button className="text-gray-400 hover:text-white" onClick={onClose}>
+          <button
+            className="text-gray-400 hover:text-white cursor-pointer"
+            onClick={onClose}
+          >
             <X size={22} />
           </button>
         </div>
