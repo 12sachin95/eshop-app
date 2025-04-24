@@ -172,6 +172,17 @@ exports.Prisma.Site_configScalarFieldEnum = {
   subCategories: 'subCategories'
 };
 
+exports.Prisma.Discount_codesScalarFieldEnum = {
+  id: 'id',
+  public_name: 'public_name',
+  discountType: 'discountType',
+  discountValue: 'discountValue',
+  discountCode: 'discountCode',
+  sellerId: 'sellerId',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -189,7 +200,8 @@ exports.Prisma.ModelName = {
   shopReviews: 'shopReviews',
   shops: 'shops',
   sellers: 'sellers',
-  site_config: 'site_config'
+  site_config: 'site_config',
+  discount_codes: 'discount_codes'
 };
 
 /**

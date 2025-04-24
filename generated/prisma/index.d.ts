@@ -43,6 +43,11 @@ export type sellers = $Result.DefaultSelection<Prisma.$sellersPayload>
  * 
  */
 export type site_config = $Result.DefaultSelection<Prisma.$site_configPayload>
+/**
+ * Model discount_codes
+ * 
+ */
+export type discount_codes = $Result.DefaultSelection<Prisma.$discount_codesPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -195,6 +200,16 @@ export class PrismaClient<
     * ```
     */
   get site_config(): Prisma.site_configDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.discount_codes`: Exposes CRUD operations for the **discount_codes** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Discount_codes
+    * const discount_codes = await prisma.discount_codes.findMany()
+    * ```
+    */
+  get discount_codes(): Prisma.discount_codesDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -640,7 +655,8 @@ export namespace Prisma {
     shopReviews: 'shopReviews',
     shops: 'shops',
     sellers: 'sellers',
-    site_config: 'site_config'
+    site_config: 'site_config',
+    discount_codes: 'discount_codes'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -659,7 +675,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "images" | "users" | "shopReviews" | "shops" | "sellers" | "site_config"
+      modelProps: "images" | "users" | "shopReviews" | "shops" | "sellers" | "site_config" | "discount_codes"
       txIsolationLevel: never
     }
     model: {
@@ -1107,6 +1123,80 @@ export namespace Prisma {
           }
         }
       }
+      discount_codes: {
+        payload: Prisma.$discount_codesPayload<ExtArgs>
+        fields: Prisma.discount_codesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.discount_codesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.discount_codesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>
+          }
+          findFirst: {
+            args: Prisma.discount_codesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.discount_codesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>
+          }
+          findMany: {
+            args: Prisma.discount_codesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>[]
+          }
+          create: {
+            args: Prisma.discount_codesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>
+          }
+          createMany: {
+            args: Prisma.discount_codesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.discount_codesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>
+          }
+          update: {
+            args: Prisma.discount_codesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>
+          }
+          deleteMany: {
+            args: Prisma.discount_codesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.discount_codesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.discount_codesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$discount_codesPayload>
+          }
+          aggregate: {
+            args: Prisma.Discount_codesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDiscount_codes>
+          }
+          groupBy: {
+            args: Prisma.discount_codesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Discount_codesGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.discount_codesFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.discount_codesAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.discount_codesCountArgs<ExtArgs>
+            result: $Utils.Optional<Discount_codesCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1184,6 +1274,7 @@ export namespace Prisma {
     shops?: shopsOmit
     sellers?: sellersOmit
     site_config?: site_configOmit
+    discount_codes?: discount_codesOmit
   }
 
   /* Types for Logging */
@@ -7559,6 +7650,1005 @@ export namespace Prisma {
 
 
   /**
+   * Model discount_codes
+   */
+
+  export type AggregateDiscount_codes = {
+    _count: Discount_codesCountAggregateOutputType | null
+    _avg: Discount_codesAvgAggregateOutputType | null
+    _sum: Discount_codesSumAggregateOutputType | null
+    _min: Discount_codesMinAggregateOutputType | null
+    _max: Discount_codesMaxAggregateOutputType | null
+  }
+
+  export type Discount_codesAvgAggregateOutputType = {
+    discountValue: number | null
+  }
+
+  export type Discount_codesSumAggregateOutputType = {
+    discountValue: number | null
+  }
+
+  export type Discount_codesMinAggregateOutputType = {
+    id: string | null
+    public_name: string | null
+    discountType: string | null
+    discountValue: number | null
+    discountCode: string | null
+    sellerId: string | null
+    createdAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type Discount_codesMaxAggregateOutputType = {
+    id: string | null
+    public_name: string | null
+    discountType: string | null
+    discountValue: number | null
+    discountCode: string | null
+    sellerId: string | null
+    createdAt: Date | null
+    updateAt: Date | null
+  }
+
+  export type Discount_codesCountAggregateOutputType = {
+    id: number
+    public_name: number
+    discountType: number
+    discountValue: number
+    discountCode: number
+    sellerId: number
+    createdAt: number
+    updateAt: number
+    _all: number
+  }
+
+
+  export type Discount_codesAvgAggregateInputType = {
+    discountValue?: true
+  }
+
+  export type Discount_codesSumAggregateInputType = {
+    discountValue?: true
+  }
+
+  export type Discount_codesMinAggregateInputType = {
+    id?: true
+    public_name?: true
+    discountType?: true
+    discountValue?: true
+    discountCode?: true
+    sellerId?: true
+    createdAt?: true
+    updateAt?: true
+  }
+
+  export type Discount_codesMaxAggregateInputType = {
+    id?: true
+    public_name?: true
+    discountType?: true
+    discountValue?: true
+    discountCode?: true
+    sellerId?: true
+    createdAt?: true
+    updateAt?: true
+  }
+
+  export type Discount_codesCountAggregateInputType = {
+    id?: true
+    public_name?: true
+    discountType?: true
+    discountValue?: true
+    discountCode?: true
+    sellerId?: true
+    createdAt?: true
+    updateAt?: true
+    _all?: true
+  }
+
+  export type Discount_codesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which discount_codes to aggregate.
+     */
+    where?: discount_codesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of discount_codes to fetch.
+     */
+    orderBy?: discount_codesOrderByWithRelationInput | discount_codesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: discount_codesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` discount_codes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` discount_codes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned discount_codes
+    **/
+    _count?: true | Discount_codesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Discount_codesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Discount_codesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Discount_codesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Discount_codesMaxAggregateInputType
+  }
+
+  export type GetDiscount_codesAggregateType<T extends Discount_codesAggregateArgs> = {
+        [P in keyof T & keyof AggregateDiscount_codes]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDiscount_codes[P]>
+      : GetScalarType<T[P], AggregateDiscount_codes[P]>
+  }
+
+
+
+
+  export type discount_codesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: discount_codesWhereInput
+    orderBy?: discount_codesOrderByWithAggregationInput | discount_codesOrderByWithAggregationInput[]
+    by: Discount_codesScalarFieldEnum[] | Discount_codesScalarFieldEnum
+    having?: discount_codesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Discount_codesCountAggregateInputType | true
+    _avg?: Discount_codesAvgAggregateInputType
+    _sum?: Discount_codesSumAggregateInputType
+    _min?: Discount_codesMinAggregateInputType
+    _max?: Discount_codesMaxAggregateInputType
+  }
+
+  export type Discount_codesGroupByOutputType = {
+    id: string
+    public_name: string
+    discountType: string
+    discountValue: number
+    discountCode: string
+    sellerId: string
+    createdAt: Date
+    updateAt: Date
+    _count: Discount_codesCountAggregateOutputType | null
+    _avg: Discount_codesAvgAggregateOutputType | null
+    _sum: Discount_codesSumAggregateOutputType | null
+    _min: Discount_codesMinAggregateOutputType | null
+    _max: Discount_codesMaxAggregateOutputType | null
+  }
+
+  type GetDiscount_codesGroupByPayload<T extends discount_codesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Discount_codesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Discount_codesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Discount_codesGroupByOutputType[P]>
+            : GetScalarType<T[P], Discount_codesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type discount_codesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    public_name?: boolean
+    discountType?: boolean
+    discountValue?: boolean
+    discountCode?: boolean
+    sellerId?: boolean
+    createdAt?: boolean
+    updateAt?: boolean
+  }, ExtArgs["result"]["discount_codes"]>
+
+
+
+  export type discount_codesSelectScalar = {
+    id?: boolean
+    public_name?: boolean
+    discountType?: boolean
+    discountValue?: boolean
+    discountCode?: boolean
+    sellerId?: boolean
+    createdAt?: boolean
+    updateAt?: boolean
+  }
+
+  export type discount_codesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "public_name" | "discountType" | "discountValue" | "discountCode" | "sellerId" | "createdAt" | "updateAt", ExtArgs["result"]["discount_codes"]>
+
+  export type $discount_codesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "discount_codes"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      public_name: string
+      discountType: string
+      discountValue: number
+      discountCode: string
+      sellerId: string
+      createdAt: Date
+      updateAt: Date
+    }, ExtArgs["result"]["discount_codes"]>
+    composites: {}
+  }
+
+  type discount_codesGetPayload<S extends boolean | null | undefined | discount_codesDefaultArgs> = $Result.GetResult<Prisma.$discount_codesPayload, S>
+
+  type discount_codesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<discount_codesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Discount_codesCountAggregateInputType | true
+    }
+
+  export interface discount_codesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['discount_codes'], meta: { name: 'discount_codes' } }
+    /**
+     * Find zero or one Discount_codes that matches the filter.
+     * @param {discount_codesFindUniqueArgs} args - Arguments to find a Discount_codes
+     * @example
+     * // Get one Discount_codes
+     * const discount_codes = await prisma.discount_codes.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends discount_codesFindUniqueArgs>(args: SelectSubset<T, discount_codesFindUniqueArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Discount_codes that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {discount_codesFindUniqueOrThrowArgs} args - Arguments to find a Discount_codes
+     * @example
+     * // Get one Discount_codes
+     * const discount_codes = await prisma.discount_codes.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends discount_codesFindUniqueOrThrowArgs>(args: SelectSubset<T, discount_codesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Discount_codes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {discount_codesFindFirstArgs} args - Arguments to find a Discount_codes
+     * @example
+     * // Get one Discount_codes
+     * const discount_codes = await prisma.discount_codes.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends discount_codesFindFirstArgs>(args?: SelectSubset<T, discount_codesFindFirstArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Discount_codes that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {discount_codesFindFirstOrThrowArgs} args - Arguments to find a Discount_codes
+     * @example
+     * // Get one Discount_codes
+     * const discount_codes = await prisma.discount_codes.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends discount_codesFindFirstOrThrowArgs>(args?: SelectSubset<T, discount_codesFindFirstOrThrowArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Discount_codes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {discount_codesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Discount_codes
+     * const discount_codes = await prisma.discount_codes.findMany()
+     * 
+     * // Get first 10 Discount_codes
+     * const discount_codes = await prisma.discount_codes.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const discount_codesWithIdOnly = await prisma.discount_codes.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends discount_codesFindManyArgs>(args?: SelectSubset<T, discount_codesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Discount_codes.
+     * @param {discount_codesCreateArgs} args - Arguments to create a Discount_codes.
+     * @example
+     * // Create one Discount_codes
+     * const Discount_codes = await prisma.discount_codes.create({
+     *   data: {
+     *     // ... data to create a Discount_codes
+     *   }
+     * })
+     * 
+     */
+    create<T extends discount_codesCreateArgs>(args: SelectSubset<T, discount_codesCreateArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Discount_codes.
+     * @param {discount_codesCreateManyArgs} args - Arguments to create many Discount_codes.
+     * @example
+     * // Create many Discount_codes
+     * const discount_codes = await prisma.discount_codes.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends discount_codesCreateManyArgs>(args?: SelectSubset<T, discount_codesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Discount_codes.
+     * @param {discount_codesDeleteArgs} args - Arguments to delete one Discount_codes.
+     * @example
+     * // Delete one Discount_codes
+     * const Discount_codes = await prisma.discount_codes.delete({
+     *   where: {
+     *     // ... filter to delete one Discount_codes
+     *   }
+     * })
+     * 
+     */
+    delete<T extends discount_codesDeleteArgs>(args: SelectSubset<T, discount_codesDeleteArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Discount_codes.
+     * @param {discount_codesUpdateArgs} args - Arguments to update one Discount_codes.
+     * @example
+     * // Update one Discount_codes
+     * const discount_codes = await prisma.discount_codes.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends discount_codesUpdateArgs>(args: SelectSubset<T, discount_codesUpdateArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Discount_codes.
+     * @param {discount_codesDeleteManyArgs} args - Arguments to filter Discount_codes to delete.
+     * @example
+     * // Delete a few Discount_codes
+     * const { count } = await prisma.discount_codes.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends discount_codesDeleteManyArgs>(args?: SelectSubset<T, discount_codesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Discount_codes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {discount_codesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Discount_codes
+     * const discount_codes = await prisma.discount_codes.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends discount_codesUpdateManyArgs>(args: SelectSubset<T, discount_codesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Discount_codes.
+     * @param {discount_codesUpsertArgs} args - Arguments to update or create a Discount_codes.
+     * @example
+     * // Update or create a Discount_codes
+     * const discount_codes = await prisma.discount_codes.upsert({
+     *   create: {
+     *     // ... data to create a Discount_codes
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Discount_codes we want to update
+     *   }
+     * })
+     */
+    upsert<T extends discount_codesUpsertArgs>(args: SelectSubset<T, discount_codesUpsertArgs<ExtArgs>>): Prisma__discount_codesClient<$Result.GetResult<Prisma.$discount_codesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Discount_codes that matches the filter.
+     * @param {discount_codesFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const discount_codes = await prisma.discount_codes.findRaw({
+     *   filter: { age: { $gt: 25 } }
+     * })
+     */
+    findRaw(args?: discount_codesFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Discount_codes.
+     * @param {discount_codesAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const discount_codes = await prisma.discount_codes.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: discount_codesAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of Discount_codes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {discount_codesCountArgs} args - Arguments to filter Discount_codes to count.
+     * @example
+     * // Count the number of Discount_codes
+     * const count = await prisma.discount_codes.count({
+     *   where: {
+     *     // ... the filter for the Discount_codes we want to count
+     *   }
+     * })
+    **/
+    count<T extends discount_codesCountArgs>(
+      args?: Subset<T, discount_codesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Discount_codesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Discount_codes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Discount_codesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Discount_codesAggregateArgs>(args: Subset<T, Discount_codesAggregateArgs>): Prisma.PrismaPromise<GetDiscount_codesAggregateType<T>>
+
+    /**
+     * Group by Discount_codes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {discount_codesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends discount_codesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: discount_codesGroupByArgs['orderBy'] }
+        : { orderBy?: discount_codesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, discount_codesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDiscount_codesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the discount_codes model
+   */
+  readonly fields: discount_codesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for discount_codes.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__discount_codesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the discount_codes model
+   */
+  interface discount_codesFieldRefs {
+    readonly id: FieldRef<"discount_codes", 'String'>
+    readonly public_name: FieldRef<"discount_codes", 'String'>
+    readonly discountType: FieldRef<"discount_codes", 'String'>
+    readonly discountValue: FieldRef<"discount_codes", 'Float'>
+    readonly discountCode: FieldRef<"discount_codes", 'String'>
+    readonly sellerId: FieldRef<"discount_codes", 'String'>
+    readonly createdAt: FieldRef<"discount_codes", 'DateTime'>
+    readonly updateAt: FieldRef<"discount_codes", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * discount_codes findUnique
+   */
+  export type discount_codesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * Filter, which discount_codes to fetch.
+     */
+    where: discount_codesWhereUniqueInput
+  }
+
+  /**
+   * discount_codes findUniqueOrThrow
+   */
+  export type discount_codesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * Filter, which discount_codes to fetch.
+     */
+    where: discount_codesWhereUniqueInput
+  }
+
+  /**
+   * discount_codes findFirst
+   */
+  export type discount_codesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * Filter, which discount_codes to fetch.
+     */
+    where?: discount_codesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of discount_codes to fetch.
+     */
+    orderBy?: discount_codesOrderByWithRelationInput | discount_codesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for discount_codes.
+     */
+    cursor?: discount_codesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` discount_codes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` discount_codes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of discount_codes.
+     */
+    distinct?: Discount_codesScalarFieldEnum | Discount_codesScalarFieldEnum[]
+  }
+
+  /**
+   * discount_codes findFirstOrThrow
+   */
+  export type discount_codesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * Filter, which discount_codes to fetch.
+     */
+    where?: discount_codesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of discount_codes to fetch.
+     */
+    orderBy?: discount_codesOrderByWithRelationInput | discount_codesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for discount_codes.
+     */
+    cursor?: discount_codesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` discount_codes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` discount_codes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of discount_codes.
+     */
+    distinct?: Discount_codesScalarFieldEnum | Discount_codesScalarFieldEnum[]
+  }
+
+  /**
+   * discount_codes findMany
+   */
+  export type discount_codesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * Filter, which discount_codes to fetch.
+     */
+    where?: discount_codesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of discount_codes to fetch.
+     */
+    orderBy?: discount_codesOrderByWithRelationInput | discount_codesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing discount_codes.
+     */
+    cursor?: discount_codesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` discount_codes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` discount_codes.
+     */
+    skip?: number
+    distinct?: Discount_codesScalarFieldEnum | Discount_codesScalarFieldEnum[]
+  }
+
+  /**
+   * discount_codes create
+   */
+  export type discount_codesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * The data needed to create a discount_codes.
+     */
+    data: XOR<discount_codesCreateInput, discount_codesUncheckedCreateInput>
+  }
+
+  /**
+   * discount_codes createMany
+   */
+  export type discount_codesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many discount_codes.
+     */
+    data: discount_codesCreateManyInput | discount_codesCreateManyInput[]
+  }
+
+  /**
+   * discount_codes update
+   */
+  export type discount_codesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * The data needed to update a discount_codes.
+     */
+    data: XOR<discount_codesUpdateInput, discount_codesUncheckedUpdateInput>
+    /**
+     * Choose, which discount_codes to update.
+     */
+    where: discount_codesWhereUniqueInput
+  }
+
+  /**
+   * discount_codes updateMany
+   */
+  export type discount_codesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update discount_codes.
+     */
+    data: XOR<discount_codesUpdateManyMutationInput, discount_codesUncheckedUpdateManyInput>
+    /**
+     * Filter which discount_codes to update
+     */
+    where?: discount_codesWhereInput
+    /**
+     * Limit how many discount_codes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * discount_codes upsert
+   */
+  export type discount_codesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * The filter to search for the discount_codes to update in case it exists.
+     */
+    where: discount_codesWhereUniqueInput
+    /**
+     * In case the discount_codes found by the `where` argument doesn't exist, create a new discount_codes with this data.
+     */
+    create: XOR<discount_codesCreateInput, discount_codesUncheckedCreateInput>
+    /**
+     * In case the discount_codes was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<discount_codesUpdateInput, discount_codesUncheckedUpdateInput>
+  }
+
+  /**
+   * discount_codes delete
+   */
+  export type discount_codesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+    /**
+     * Filter which discount_codes to delete.
+     */
+    where: discount_codesWhereUniqueInput
+  }
+
+  /**
+   * discount_codes deleteMany
+   */
+  export type discount_codesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which discount_codes to delete
+     */
+    where?: discount_codesWhereInput
+    /**
+     * Limit how many discount_codes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * discount_codes findRaw
+   */
+  export type discount_codesFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * discount_codes aggregateRaw
+   */
+  export type discount_codesAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * discount_codes without action
+   */
+  export type discount_codesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the discount_codes
+     */
+    select?: discount_codesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the discount_codes
+     */
+    omit?: discount_codesOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7640,6 +8730,20 @@ export namespace Prisma {
   };
 
   export type Site_configScalarFieldEnum = (typeof Site_configScalarFieldEnum)[keyof typeof Site_configScalarFieldEnum]
+
+
+  export const Discount_codesScalarFieldEnum: {
+    id: 'id',
+    public_name: 'public_name',
+    discountType: 'discountType',
+    discountValue: 'discountValue',
+    discountCode: 'discountCode',
+    sellerId: 'sellerId',
+    createdAt: 'createdAt',
+    updateAt: 'updateAt'
+  };
+
+  export type Discount_codesScalarFieldEnum = (typeof Discount_codesScalarFieldEnum)[keyof typeof Discount_codesScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8152,6 +9256,75 @@ export namespace Prisma {
     subCategories?: JsonWithAggregatesFilter<"site_config">
   }
 
+  export type discount_codesWhereInput = {
+    AND?: discount_codesWhereInput | discount_codesWhereInput[]
+    OR?: discount_codesWhereInput[]
+    NOT?: discount_codesWhereInput | discount_codesWhereInput[]
+    id?: StringFilter<"discount_codes"> | string
+    public_name?: StringFilter<"discount_codes"> | string
+    discountType?: StringFilter<"discount_codes"> | string
+    discountValue?: FloatFilter<"discount_codes"> | number
+    discountCode?: StringFilter<"discount_codes"> | string
+    sellerId?: StringFilter<"discount_codes"> | string
+    createdAt?: DateTimeFilter<"discount_codes"> | Date | string
+    updateAt?: DateTimeFilter<"discount_codes"> | Date | string
+  }
+
+  export type discount_codesOrderByWithRelationInput = {
+    id?: SortOrder
+    public_name?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
+    discountCode?: SortOrder
+    sellerId?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type discount_codesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    discountCode?: string
+    AND?: discount_codesWhereInput | discount_codesWhereInput[]
+    OR?: discount_codesWhereInput[]
+    NOT?: discount_codesWhereInput | discount_codesWhereInput[]
+    public_name?: StringFilter<"discount_codes"> | string
+    discountType?: StringFilter<"discount_codes"> | string
+    discountValue?: FloatFilter<"discount_codes"> | number
+    sellerId?: StringFilter<"discount_codes"> | string
+    createdAt?: DateTimeFilter<"discount_codes"> | Date | string
+    updateAt?: DateTimeFilter<"discount_codes"> | Date | string
+  }, "id" | "discountCode">
+
+  export type discount_codesOrderByWithAggregationInput = {
+    id?: SortOrder
+    public_name?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
+    discountCode?: SortOrder
+    sellerId?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+    _count?: discount_codesCountOrderByAggregateInput
+    _avg?: discount_codesAvgOrderByAggregateInput
+    _max?: discount_codesMaxOrderByAggregateInput
+    _min?: discount_codesMinOrderByAggregateInput
+    _sum?: discount_codesSumOrderByAggregateInput
+  }
+
+  export type discount_codesScalarWhereWithAggregatesInput = {
+    AND?: discount_codesScalarWhereWithAggregatesInput | discount_codesScalarWhereWithAggregatesInput[]
+    OR?: discount_codesScalarWhereWithAggregatesInput[]
+    NOT?: discount_codesScalarWhereWithAggregatesInput | discount_codesScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"discount_codes"> | string
+    public_name?: StringWithAggregatesFilter<"discount_codes"> | string
+    discountType?: StringWithAggregatesFilter<"discount_codes"> | string
+    discountValue?: FloatWithAggregatesFilter<"discount_codes"> | number
+    discountCode?: StringWithAggregatesFilter<"discount_codes"> | string
+    sellerId?: StringWithAggregatesFilter<"discount_codes"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"discount_codes"> | Date | string
+    updateAt?: DateTimeWithAggregatesFilter<"discount_codes"> | Date | string
+  }
+
   export type imagesCreateInput = {
     id?: string
     file_id: string
@@ -8577,6 +9750,79 @@ export namespace Prisma {
     subCategories?: InputJsonValue | InputJsonValue
   }
 
+  export type discount_codesCreateInput = {
+    id?: string
+    public_name: string
+    discountType: string
+    discountValue: number
+    discountCode: string
+    sellerId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+  }
+
+  export type discount_codesUncheckedCreateInput = {
+    id?: string
+    public_name: string
+    discountType: string
+    discountValue: number
+    discountCode: string
+    sellerId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+  }
+
+  export type discount_codesUpdateInput = {
+    public_name?: StringFieldUpdateOperationsInput | string
+    discountType?: StringFieldUpdateOperationsInput | string
+    discountValue?: FloatFieldUpdateOperationsInput | number
+    discountCode?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type discount_codesUncheckedUpdateInput = {
+    public_name?: StringFieldUpdateOperationsInput | string
+    discountType?: StringFieldUpdateOperationsInput | string
+    discountValue?: FloatFieldUpdateOperationsInput | number
+    discountCode?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type discount_codesCreateManyInput = {
+    id?: string
+    public_name: string
+    discountType: string
+    discountValue: number
+    discountCode: string
+    sellerId: string
+    createdAt?: Date | string
+    updateAt?: Date | string
+  }
+
+  export type discount_codesUpdateManyMutationInput = {
+    public_name?: StringFieldUpdateOperationsInput | string
+    discountType?: StringFieldUpdateOperationsInput | string
+    discountValue?: FloatFieldUpdateOperationsInput | number
+    discountCode?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type discount_codesUncheckedUpdateManyInput = {
+    public_name?: StringFieldUpdateOperationsInput | string
+    discountType?: StringFieldUpdateOperationsInput | string
+    discountValue?: FloatFieldUpdateOperationsInput | number
+    discountCode?: StringFieldUpdateOperationsInput | string
+    sellerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8971,6 +10217,47 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type discount_codesCountOrderByAggregateInput = {
+    id?: SortOrder
+    public_name?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
+    discountCode?: SortOrder
+    sellerId?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type discount_codesAvgOrderByAggregateInput = {
+    discountValue?: SortOrder
+  }
+
+  export type discount_codesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    public_name?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
+    discountCode?: SortOrder
+    sellerId?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type discount_codesMinOrderByAggregateInput = {
+    id?: SortOrder
+    public_name?: SortOrder
+    discountType?: SortOrder
+    discountValue?: SortOrder
+    discountCode?: SortOrder
+    sellerId?: SortOrder
+    createdAt?: SortOrder
+    updateAt?: SortOrder
+  }
+
+  export type discount_codesSumOrderByAggregateInput = {
+    discountValue?: SortOrder
   }
 
   export type usersCreateNestedOneWithoutAvatarInput = {
