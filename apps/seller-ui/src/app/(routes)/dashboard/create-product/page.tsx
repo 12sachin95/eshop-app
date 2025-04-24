@@ -139,9 +139,14 @@ const Page = () => {
     setProcessing(true);
     setActiveEffect(transformation);
     try {
-      const transformedUrl = selectedImage.includes("?")
-        ? `${selectedImage}&tr=${transformation}`
-        : `${selectedImage}?tr=${transformation}`;
+      let transformedUrl = selectedImage;
+      if (selectedImage.includes("?")) {
+        const splitedImage = selectedImage.split("?")[0];
+        transformedUrl = `${splitedImage}?tr=${transformation}`;
+      } else {
+        transformedUrl = `${selectedImage}?tr=${transformation}`;
+      }
+
       setSelectedImage(transformedUrl);
     } catch (error) {
       console.log("Error in product image AI enhancement", error);
