@@ -97,11 +97,11 @@ const Page = () => {
 
       {/* Breadcrumbs */}
       <div className="flex items-center">
-        <Link href="/dashboard" className="text-[#80Deea] cursor-pointer">
+        <Link href="/dashboard" className="text-blue-400 cursor-pointer">
           Dashboard
         </Link>
         <ChevronRight size={20} className="opacity-[0.8]" />
-        <span>Discount Codes</span>
+        <span className="text-white">Discount Codes</span>
       </div>
 
       <div className="mt-8 bg-gray-900 p-6 rounded-lg shadow-lg">

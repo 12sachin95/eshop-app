@@ -6,6 +6,7 @@ import axiosInstance from "apps/seller-ui/src/utils/axiosInstance";
 import { ChevronRight, Wand, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ColorSelector from "packages/components/color-selector";
 import CustomProperties from "packages/components/custom-properties";
 import CustomSpecifications from "packages/components/custom-specifications";
@@ -14,6 +15,7 @@ import RichtextEditor from "packages/components/rich-text-editor";
 import SizeSelector from "packages/components/size-selector";
 import React, { useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type UploadedImage = {
   fileId: string;
@@ -29,7 +31,7 @@ const Page = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const router = useRouter();
   const [openImageModal, setOpenImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -72,8 +74,16 @@ const Page = () => {
     return selectedCategory ? subCategoriesData[selectedCategory] || [] : [];
   }, [selectedCategory, subCategoriesData]);
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      setLoading(true);
+      await axiosInstance.post("/product/api/create-product", data);
+      router.push("/dashboard/all-products");
+    } catch (error: any) {
+      toast.error(error?.data?.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const convertFileToBase64 = (file: any) => {
@@ -167,11 +177,11 @@ const Page = () => {
         Create Product
       </h2>
       <div className="flex items-center">
-        <Link href="/dashboard" className="text-[#80Deea] cursor-pointer">
+        <Link href="/dashboard" className="text-blue-400 cursor-pointer">
           Dashboard
         </Link>
         <ChevronRight size={20} className="opacity-[0.8]" />
-        <span>Create Product</span>
+        <span className="text-white">Create Product</span>
       </div>
 
       {/* Content Layout */}
@@ -229,8 +239,8 @@ const Page = () => {
                   rows={7}
                   cols={10}
                   label={"Short Description * (Max 150 words)"}
-                  placeholder={"Enter Product description for quick view"}
-                  {...register("description", {
+                  placeholder={"Enter Product short_description for quick view"}
+                  {...register("short_description", {
                     required: "Description is required",
                     validate: (value) => {
                       const wordCount = value.trim().split(/\s+/).length;
@@ -241,9 +251,9 @@ const Page = () => {
                     },
                   })}
                 />
-                {errors.description && (
+                {errors.short_description && (
                   <p className="text-red-500">
-                    {errors?.description?.message as string}
+                    {errors?.short_description?.message as string}
                   </p>
                 )}
               </div>
@@ -497,6 +507,30 @@ const Page = () => {
                 {errors?.video_url && (
                   <p className="text-red-500 text-xs mt-1">
                     {errors.video_url.message as string}
+                  </p>
+                )}
+              </div>
+
+              <div className="mt-2">
+                <Input
+                  label="Regular Price *"
+                  placeholder="15$"
+                  {...register("regular_price", {
+                    required: "Regular Price is required!",
+                    valueAsNumber: true,
+                    min: {
+                      value: 1,
+                      message: "Regular Price must be at least 1",
+                    },
+                    validate: (value) => {
+                      if (isNaN(value)) return "Only numbers are valid";
+                      return true;
+                    },
+                  })}
+                />
+                {errors?.regular_price && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.regular_price.message as string}
                   </p>
                 )}
               </div>

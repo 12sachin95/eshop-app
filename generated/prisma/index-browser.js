@@ -115,7 +115,8 @@ exports.Prisma.ImagesScalarFieldEnum = {
   file_id: 'file_id',
   url: 'url',
   shopId: 'shopId',
-  userId: 'userId'
+  userId: 'userId',
+  productsId: 'productsId'
 };
 
 exports.Prisma.UsersScalarFieldEnum = {
@@ -183,6 +184,38 @@ exports.Prisma.Discount_codesScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
+exports.Prisma.ProductsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  category: 'category',
+  subCategory: 'subCategory',
+  short_description: 'short_description',
+  detailed_description: 'detailed_description',
+  video_url: 'video_url',
+  tags: 'tags',
+  brand: 'brand',
+  colors: 'colors',
+  sizes: 'sizes',
+  starting_date: 'starting_date',
+  ending_date: 'ending_date',
+  stock: 'stock',
+  sale_price: 'sale_price',
+  regular_price: 'regular_price',
+  ratings: 'ratings',
+  warranty: 'warranty',
+  custom_specifications: 'custom_specifications',
+  custom_properties: 'custom_properties',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  cash_on_delivery: 'cash_on_delivery',
+  discount_codes: 'discount_codes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updateAt: 'updateAt',
+  shopId: 'shopId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -192,7 +225,11 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-
+exports.productStatus = exports.$Enums.productStatus = {
+  Active: 'Active',
+  Pending: 'Pending',
+  Draft: 'Draft'
+};
 
 exports.Prisma.ModelName = {
   images: 'images',
@@ -201,7 +238,8 @@ exports.Prisma.ModelName = {
   shops: 'shops',
   sellers: 'sellers',
   site_config: 'site_config',
-  discount_codes: 'discount_codes'
+  discount_codes: 'discount_codes',
+  products: 'products'
 };
 
 /**

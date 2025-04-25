@@ -29,7 +29,7 @@ const CustomSpecifications = ({ control, errors }: any) => {
               )}
             />
             <Controller
-              name={`custom_specifications.${index}.name`}
+              name={`custom_specifications.${index}.value`}
               control={control}
               rules={{ required: "Value is required" }}
               render={({ field }) => (
