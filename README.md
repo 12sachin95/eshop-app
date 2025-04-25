@@ -1,82 +1,177 @@
-# 
+# 🛍️ Multi-Vendor SaaS Platform
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+A scalable, production-ready **Multi-Vendor SaaS platform** built using modern technologies like **NX monorepo**, **Next.js**, **Express.js**, **Redis**, **Stripe**, **Kafka**, **Docker**, **JWT**, **ImageKit**, **React Query**, **TailwindCSS**, **Prisma**, **WebSocket**, **Firebase**, **Swagger**, **CI/CD**, **Jest**, and **AWS deployment**.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+---
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/node?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## 🚀 Tech Stack
 
-## Finish your CI setup
+| Category       | Technologies                                                            |
+| -------------- | ----------------------------------------------------------------------- |
+| Frontend       | Next.js (App Router), React, Tailwind CSS, React Query, React Hook Form |
+| Backend        | Node.js, Express.js, Prisma ORM, JWT, Redis, Kafka, WebSocket           |
+| Authentication | Firebase, JWT                                                           |
+| File Storage   | ImageKit, AWS                                                           |
+| Payments       | Stripe                                                                  |
+| API Testing    | Jest                                                                    |
+| API Docs       | Swagger                                                                 |
+| Realtime       | WebSocket                                                               |
+| DevOps         | Docker, AWS, CI/CD, GitHub Actions                                      |
+| Monorepo       | Nx                                                                      |
+| Database       | MongoDB (via Prisma ORM)                                                |
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/Jw2eG5Abdr)
+---
 
+## 📁 Project Structure
 
-## Run tasks
-
-To run the dev server for your app, use:
-
-```sh
-npx nx serve auth-service
+```
+├── apps
+│   ├── user-ui (Next.js frontend for user)
+│   ├── seller-ui (Next.js frontend for seller)
+│   ├── auth-service (Authentication microservice)
+│   ├── api-gateway (API aggregator)
+│   └── product-service (product-related APIs)
+├── packages
+│   └── shared (types, utils, constants)
+├── prisma
+│   └── schema.prisma
+├── docker
+│   └── docker-compose.yml
+└── .github
+    └── workflows (CI/CD)
 ```
 
-To create a production bundle:
+---
 
-```sh
-npx nx build auth-service
+## ⚙️ Features
+
+- 🧾 **Vendor Management** (Create, manage, verify vendors)
+- 👨‍💼 **Multi-tenancy SaaS model**
+- 🔐 **JWT Authentication** with Firebase
+- 💳 **Stripe Integration** for payments and subscriptions
+- 📦 **Kafka Messaging** for event-driven architecture
+- ⚡️ **Realtime updates** via WebSocket
+- 🧠 **Smart Forms** using React Hook Form + Zod
+- 🧵 **Monorepo structure** via Nx
+- 📊 **Charts & Analytics** (via Swagger Charts)
+- ☁️ **AWS Deployment** (ECS, S3, etc.)
+- 📸 **Image Upload** via ImageKit
+- 🔄 **React Query** for state & caching
+- ✅ **CI/CD pipeline** with GitHub Actions
+- 🔍 **API Testing** with Jest & Supertest
+
+---
+
+## 🐳 Docker Setup
+
+1. **Start all services**:
+
+```bash
+docker-compose up --build
 ```
 
-To see all available targets to run for a project, run:
+2. Access frontend: `http://localhost:3000`
 
-```sh
-npx nx show project auth-service
+3. Access API Gateway: `http://localhost:8080`
+
+---
+
+## 🔐 Environment Variables
+
+Each service uses its own `.env` file. Common variables:
+
+```env
+DATABASE_URL=
+REDIS_HOST=
+REDIS_PORT="6379"
+REDIS_PASSWORD=
+REDIS_DATABASE_URI=
+SMTP_USER=
+SMTP_PASS=
+SMTP_PORT=
+SMTP_SERVICE=x
+SMTP_HOST=
+ACCESS_TOKEN_SECRET=
+REFRESH_TOKEN_SECRET=x
+STRIPE_SECRET_KEY=
+IMAGEKIT_PUBLIC_KEY=
+IMAGEKIT_PRIVATE_KEY=
+IMAGEKIT_URL=
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+---
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🧪 Testing
 
-## Add new projects
+Run all tests:
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/node:app demo
+```bash
+nx run-many --target=test --all
 ```
 
-To generate a new library, use:
+Individual test:
 
-```sh
-npx nx g @nx/node:lib mylib
+```bash
+nx test auth-service
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+---
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🚢 Deployment
 
+CI/CD configured via GitHub Actions:
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- Push to `main` → triggers build & deploy to AWS
+- Docker images pushed to Amazon ECR
+- Deployed via ECS / Lambda (depending on service)
 
-## Install Nx Console
+---
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## 🧩 Swagger API Docs
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Each service includes Swagger documentation at:
 
-## Useful links
+```
+http://localhost:<port>/api-docs
+```
 
-Learn more:
+---
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/node?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## 🔗 Useful Commands
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+| Command                            | Description                |
+| ---------------------------------- | -------------------------- |
+| `nx serve <app>`                   | Serve individual app       |
+| `nx build <app>`                   | Build app                  |
+| `nx lint <app>`                    | Run lint                   |
+| `nx test <app>`                    | Run tests                  |
+| `nx run-many --target=serve --all` | Serve all apps in parallel |
+
+---
+
+## 📸 Screenshots
+
+_(Add images/gifs of dashboard, login, vendor panel, etc.)_
+
+---
+
+## 🙌 Contribution
+
+Pull requests are welcome! Please make sure to:
+
+- Follow Nx workspace conventions
+- Write clean, well-documented code
+- Add test coverage for new features
+
+---
+
+## 📧 Contact
+
+For questions, reach out to **[Sachin Rathore](mailto:12sachin95@gmail.com)**  
+Or open an [issue](https://github.com/12sachin95/eshop-app/issues)
+
+---
+
+## 📝 License
+
+MIT © 2025 – Built with ❤️ by Sachin Rathore
