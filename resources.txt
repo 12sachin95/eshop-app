@@ -1,0 +1,34 @@
+database mongo setup
+https://cloud.mongodb.com/v2/6800db3c45cdf62b82700be4#/metrics/replicaSet/6800db9bb38fe856320f722b/explorer/development/products/find
+
+ORM 
+https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/introduction#3-importing-prisma-client
+
+Redis setup using upstash
+https://console.upstash.com/login
+
+icons for UI
+https://lucide.dev/icons/image
+https://www.svgviewer.dev/svg-to-react-jsx
+
+Monorepo setup
+https://nx.dev/nx-api/next
+
+jwt generate
+https://jwtsecret.com/generate
+
+stripe for payments
+https://dashboard.stripe.com/register
+
+imagekit for uploading images
+https://imagekit.io/dashboard/media-library/L3Byb2R1Y3Rz
+
+cron jobs for auto expire 
+https://www.npmjs.com/package/node-cron
+
+nodemailer credentials from google account to get SMTP details
+https://myaccount.google.com/apppasswords?continue=https://myaccount.google.com/?utm_source%3Dchrome-profile-chooser%26pli%3D1&rapt=AEjHL4Nj9jD104AYDfOGTDMMa5DFDczeu_0pA0i8TAbXKjWjv3LkGNwFiwy-MpBvFVMaWkL9Ct3VGStqKT0JspJR3kqNHniofzrrI2fjAL04NcJ7b4Xco1c
+
+
+source of project video becodemy youtube channel
+https://www.youtube.com/watch?v=XiD_TsGRQtE
