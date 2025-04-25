@@ -4,6 +4,7 @@ import { errorMiddleware } from "@packages/error-handler/error-middleware";
 import cookieParser from "cookie-parser";
 import router from "./routes/product.routes";
 import swaggerUi from "swagger-ui-express";
+import "./jobs/product-crone.job";
 const swaggerDocument = require("./swagger-output.json");
 
 const app = express();
@@ -35,7 +36,9 @@ app.use(errorMiddleware);
 
 const server = app.listen(port, () => {
   console.log(`Product service is running on http://localhost:${port}`);
-  console.log(`Swagger Docs available on http://localhost:${port}/docs-json`);
+  console.log(
+    `Swagger Docs for product service available on http://localhost:${port}/docs-json`
+  );
 });
 
 server.on("error", (error) => {
